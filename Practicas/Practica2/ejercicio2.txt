@@ -1,0 +1,117 @@
+Historia de usuario 1
+    ID: cargar las carreras.
+    Titulo: como empleado administrativo quiero cargar las carreras al sistema para poder automatizar el pago de ellas.
+    Reglas de negocio:
+        - No pueden repetirse el nombre de las carreras.
+        - Una carrera no puede durar mas de 5 anios.
+
+    Criterios de aceptacion:
+        Escenario 1: carga exitosa.
+        Dado un empleado administrativo que quiere agregar una carrera al sistema.
+        Cuando ingresa el nombre "Letras", duracion "5 anios", costo "50.000$" y cantidad maxima de cuotas "12". 
+        Entonces el sistema informa que la carrera ha sido cargada.
+
+        Escenario 2: carga fallida por nombre repetido.
+        Dado un empleado administrativo que quiere agregar una carrera que ya pertenece al sistema.
+        Cuando ingresa el nombre "Letras", duracion "5 anios", costo "50.000$" y cantidad maxima de cuotas "12". 
+        Entonces el sistema informa un error que el nombre de la carrera ya esta cargado.
+
+        Escenario 3: carga fallida por duracion de la carrera.
+        Dado un empleado administrativo que quiere agregar una carrera cuya duracion es mayor a 5 anios.
+        Cuando ingresa el nombre "Letras", duracion "7 anios", costo "50.000$" y cantidad maxima de cuotas "12". 
+        Entonces el sistema informa un error que la duracion de la carrera es mayor a 5 anios.
+
+Historia de usuario 2
+    ID: registrarse.
+    Titulo: como alumno no registrado quiero registrarme para anotarme a las carreras.
+    Reglas de negocio:
+        - Que el nombre de usuario sea unico.
+        - Que la contraseña tenga mas de 6 digitos.
+    
+    Criterios de aceptacion:
+        Escenario 1: registro exitoso.
+        Dado un alumno que quiere registrarse en la web.
+        Cuando ingresa nombre "Valentin", apellido "Aruanno", nombre de usuario "valengamer" y contraseña "pepito123"
+        al presionar enter.
+        Entonces el sistema informa que el alumno fue registrado exitosamente.
+
+        Escenario 2: registro fallido por nombre de usuario existente.
+        Dado un alumno que quiere registrarse en la web usando un nombre de usuario existente.
+        Cuando ingresa nombre "Valentin", apellido "Aruanno", nombre de usuario "valengamer" y contraseña "pepito123",
+        al presionar enter.
+        Entonces el sistema informa que el nombre de usuario ingresado ya esta en uso y que ingrese uno distinto.
+
+        Escenario 3: registro fallido por contraseña invalida.
+        Dado un alumno que quiere registrarse en la web usando una contraseña invalida.
+        Cuando ingresa nombre "Valentin", apellido "Aruanno", nombre de usuario "valengamer" y contraseña "pep",
+        al presionar enter.
+        Entonces el sistema informa que la contraseña debe tener mas de 6 digitos y que ingrese una nueva.
+
+Historia de usuario 3
+    id: iniciar sesion.
+    Titulo: como usuario quiero iniciar sesion para hacer uso de mi cuenta registrada.
+    Reglas de negocio:
+
+    Criterios de aceptacion:
+        Escenario 1: inicio exitoso.
+            Dado una usuario y contraseña que pertenecen a alguien registrado en el sistema.
+            Cuando la persona ingrese su usuario "valentin" y contraseña "xxxxx" y presiona enter.
+            Entonces permitira entrar en la pagina con el rol de alumno y sus correspondientes herramientas.
+
+        Escenario 2: inicio fallido.
+            Dado una usuario y contraseña que no pertenecen a alguien registrado en el sistema.
+            Cuando la persona ingrese su usuario "fabio" y contraseña "yyyyyy" y presiona enter.
+            Entonces el sistema informara que el usuario o la contraseña son incorrectos.
+
+Historia de usuario 4
+    Id: cerrar sesion.
+    Titulo: como usuario alumno quiero cerrar sesion para salir de mi cuenta.
+    Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: cierre exitoso.
+        Dado que un usuario alumno con la sesion iniciada.
+        Cuando el alumno presiona cerrar sesion.
+        Entonces el sistema lo redirige a la pagina principal con el rol de usuario no registrado.
+
+Historia de usuario 5
+    Id: inscribirse a una carrera.
+    Titulo: como alumno quiero inscribirme a una carrera para poder cursarla.
+    Reglas de negocio:
+
+    Escenario 1: inscripcion exitosa.
+        Dado un alumno que inicio sesion y quiere anotarse a una carrera.
+        Cuando selecciona la carrera "Nutricion", cantidad de cuotas "12", numero de tarjeta "112233" y presiona enter.
+        Entonces el sistema redirige al usuario al pago de inscripción con tarjeta de crédito, espera respuesta e informa que la inscripcion fue exitosa.
+
+    Escenario 2: Inscripción fallida por error en el pago
+        Dado un alumno que inicio sesion y quiere anotarse a una carrera pero las condiciones no son las adecuadas para un pago exitoso.
+        Cuando selecciona la carrera "Nutricion", cantidad de cuotas "12", numero de tarjeta "112233" y presiona enter.
+        Entonces el sistema redirige al usuario al pago de inscripción con tarjeta de crédito, espera respuesta e informa que hubo un error en el pago por lo que no se pudo llevar a cabo la inscripción.
+
+Historia de usuario 6 
+    Id: pago de la carrera.
+    Titulo: como alumno quiero pagar la carrera para poder cursarla.
+    Reglas de negocio:
+        - Que el numero de la tarjeta pertenezca a la de una tarjeta de credito.
+    
+    Escenario 1: pago exitoso.
+        Dado que la conexión con el servidor del banco es exitosa, el número 1234 corresponde a una tarjeta de crédito y la tarjeta tiene saldo.
+        Cuando el usuario ingresa la tarjeta "1234" y presiona pagar.
+        Entonces el sistema imprime el comprobante de pago y el de inscripcion.
+
+    Escenario 2: pago fallido por número de tarjeta de crédito inexistente
+        Dado que la conexión con el servidor del banco es exitosa y el número :3456" no
+        corresponde a un número de tarjeta de crédito.
+        Cuando el matriculado o la persona ingresa el número de tarjeta "3456" y presiona "Pagar".
+        Entonces el sistema retorna un error por número de tarjeta inexistente.
+    
+    Escenario 3: pago fallido por saldo insuficiente de tarjeta de crédito.
+        Dado que la conexión con el servidor del banco es exitosa y el número de tarjeta 2134 corresponde a una tarjeta de crédito y no tiene saldo para el pago que se solicita hacer.
+        Cuando el usuario ingresa el número de tarjeta 2134 y presiona “Pagar”.
+        Entonces el sistema retorna un error por saldo insuficiente.
+
+    Escenario 4: Pago fallido por fallo en la conexión con el servidor externo del banco.
+        Dado que no se pudo realizar la conexión con el servidor del banco.
+        Cuando el usuario ingresa un número de tarjeta y presiona “Pagar”.
+        Entonces el sistema retorna un error por conexión fallida.

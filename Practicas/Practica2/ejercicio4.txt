@@ -1,0 +1,78 @@
+Problema 4: Venta de bebidas
+Se desea modelar un sistema para el manejo de venta de bebidas alcohólicas en línea. Para poder empezar a comprar en el sitio, es necesario que las personas se registren ingresando nombre, apellido, mail (será utilizado como nombre de usuario por lo tanto debe ser único) y edad. 
+Solo se permite que se registren al sitio personas mayores a 18 años, de lo contrario el sistema debe mostrar en pantalla el texto de la ley que impide la venta de bebidas alcohólicas a menores. Si el registro es exitoso el sistema genera una contraseña que es enviada al mail 
+ingresado en el registro. Para comprar el usuario debe iniciar sesión y una vez logueado el sistema muestra una lista de bebidas, una vez que el usuario selecciona todos los productos que desea comprar, si el usuario es premium se le hace un descuento del 20% y se informa en 
+pantalla el total menos el 20%. Además si el usuario seleccionó productos por un monto superior a los $4500 se le hace un 10% de descuento y se informa en pantalla el total menos el 10%. Tenga en cuenta que si el usuario es premium y compra por un monto superior a $4500 se 
+deben aplicar ambos descuentos.
+
+Historia de usuario 1
+ID: Registrar usuario
+Título: Como usuario quiero registrarme para poder comprar en la tienda.
+Reglas de negocio:
+    - Ley que impide la venta de bebidas a menores de 18.
+
+Escenario 1: Registro exitoso
+    Dado un usuario con mail “pepitogamer1244@gmial.com” que es mayor a 18 años.
+    Cuando ingresa el nombre “Pepe”, apellido “Guardiola”, mail “pepitogamer1234@gmail.com” y edad 19 y presiona registrarse.
+    Entonces el sistema registra el usuario, le envía su contraseña al mail ingresado e informa que el usuario se ha registrado correctamente.
+
+Escenario 2: Registro fallido porque el usuario es menor de edad
+    Dado un usuario con mail “pepitofocus@gmail.com” que es menor de edad.
+    Cuando ingresa el nombre “Pepe”, apellido “Guardiola”, mail “pepitofocus@gmail.com” y edad 17 y presiona registrarse.
+    Entonces el sistema muestra en pantalla la ley que impide la venta de bebidas alcohólicas a menores de 18 años.
+
+Historia de usuario 2
+ID: Iniciar sesión
+Título: Como usuario quiero iniciar sesión para poder comprar en la tienda de bebidas.
+Reglas de negocio:
+
+Criterios de aceptación:
+Escenario 1: Inicio exitoso
+    Dado un usuario “pepito” y contraseña “12345” que pertenecen a alguien registrado en el sistema.
+    Cuando la persona ingresa su usuario "pepito" y contraseña "12345" y presiona enter.
+    Entonces el sistema redirige a la página principal donde se pueden ver todas las bebidas disponibles.
+
+Escenario 2: Inicio fallido
+    Dado un usuario “fabio” y contraseña “yyyyyy” que no pertenecen a alguien registrado en el sistema.
+    Cuando la persona ingresa su usuario "fabio" y contraseña "yyyyyy" y presiona enter.
+    Entonces el sistema informará que el usuario o la contraseña son incorrectos.
+
+Historia de usuario 3
+ID: Cerrar sesión
+Título: Como usuario quiero cerrar sesión para salir de mi cuenta.
+Reglas de negocio:
+
+Criterios de aceptación:
+Escenario 1: Cierre exitoso
+    Dado un usuario “pepito” con la sesión iniciada.
+    Cuando el usuario presiona cerrar sesión.
+    Entonces el sistema lo redirige a la página de login y signin.
+
+Historia de usuario 4
+ID: Comprar productos
+Título: Como usuario quiero seleccionar los productos para poder realizar mi compra.
+Reglas de negocio:
+    - Si el cliente es premium recibe un 20% off.
+    - Si la compra supera los $4.500, el cliente recibe 10%.
+
+Criterios de aceptacion:
+    Escenario 1: Compra usuario premium 
+        Dado un usuario con nombre de usuario "valentin", que es cliente premium
+        Cuando arma su lista de productos y presionar "Comprar"
+        Entonces el sistema calcula el costo de la compra, aplica el 20% al total a pagar e informa el monto.
+
+    Escenario 2: Compra usuario comun 
+        Dado un usuario con nombre de usuario "fabio", que es cliente comun 
+        Cuando arma su lista de productos y presionar "Comprar"
+        Entonces el sistema calcula el costo de la compra e informa el monto.
+    
+    Escenario 3: Compra superior a $4.500 
+        Dado un usuario con nombre de usuario "valentin", que es cliente comun y cuya compra es superior a $4.500
+        Cuando arma su lista de productos y presionar "Comprar"
+        Entonces el sistema calcula el costo de la compra, aplica el 10% al total a pagar e informa el monto.
+    
+    Escenario 3: Compra superior a $4.500 de un cliente premium
+        Dado un usuario con nombre de usuario "diego", que es cliente premium y cuya compra es superior a $4.500
+        Cuando arma su lista de productos y presionar "Comprar"
+        Entonces el sistema calcula el costo de la compra, aplica el 30% al total a pagar e informa el monto.
+    

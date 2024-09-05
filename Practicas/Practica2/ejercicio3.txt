@@ -1,0 +1,69 @@
+Historia de usuario 1
+ID: Realizar minuta
+Título: Como empleado quiero automatizar la confección de minutas para ahorrarme el trabajo de hacerlo a mano
+Reglas de negocio:
+    - Los montos no pueden superar los $25.000
+    - Duración debe ser como máximo de 6 meses
+
+Escenario 1: Minuta cargada exitosamente
+    Dado un empleado con CUIT “45579759-5” cuyo monto no supera los $25.000 y duración 4 meses.
+    Cuando se ingresa el empleado con CUIT “45579759-5”, tipo de contrato “trainee”, fecha de comienzo 4/9/2024, duración 4 meses y monto $20000.
+    Entonces el sistema carga la minuta e informa que la minuta ha sido cargada al sistema.
+
+Escenario 2: Carga de minuta fallida por monto superior a $25.000
+    Dado un empleado con CUIT “45579759-5” cuyo monto supera los $25.000 y la duracion es de 4 meses.
+    Cuando se ingresa el empleado con CUIT “45579759-5”, tipo de contrato “trainee”, fecha de comienzo 4/9/2024, duración 4 meses y monto $29000.
+    Entonces el sistema no carga la minuta e informa error por monto superior a $25.000.
+
+Escenario 3: Carga de minuta fallida por duración mayor a 6 meses
+    Dado un empleado con CUIT “45579759-5” cuyo duración es mayor a 6 meses y el monto es $23.000.
+    Cuando se ingresa el empleado con CUIT “45579759-5”, tipo de contrato “trainee”, fecha de comienzo 4/9/2024, duración 12 meses y monto $18000.
+    Entonces el sistema no carga la minuta e informa error por duración mayor a 6 meses.
+
+Historia de usuario 2
+La comunicación con la AFIP la hace el sistema, por lo tanto no es una historia de usuario.
+ID: Aprobar minuta
+Título: Como empleado de rendiciones quiero automatizar la aprobación de minutas para poder generar un listado del personal contratado.
+Reglas de negocio:
+    - Una persona contratada no puede tener más de 3 minutas
+    - El CUIT de la persona debe estar habilitado por la AFIP
+
+Escenario 1: Minuta aprobada exitosamente
+    Dado un número de minuta “44444” que está pendiente de aprobar, no tiene 3 minutas vigentes y la conexión con la AFIP ha sido exitosa.
+    Cuando se ingresa el número de minuta “44444” y se presiona “aprobar”.
+    Entonces el sistema registra el nuevo contrato e informa que la minuta ha sido aprobada.
+
+Escenario 2: Minuta fallida de aprobación porque el usuario posee 3 minutas.
+    Dado un número de minuta “6666666666” que está pendiente de aprobar, se realizo la conexion con el servidor de la AFIP y tiene 3 minutas vigentes.
+    Cuando se ingresa el número de minuta “6666666666” y se presiona “aprobar”.
+    Entonces el sistema informa que la minuta no se puede aprobar debido a que el usuario ya posee el máximo de minutas.
+
+Escenario 3: Minuta fallida de aprobación porque el usuario posee el CUIT deshabilitado.
+    Dado un número de minuta “6666666666” que está pendiente de aprobar, se realizo la conexion con el servidor de la AFIP Y cuyo usuario posee el CUIT deshabilitado.
+    Cuando se ingresa el número de minuta “6666666666” y se presiona “aprobar”.
+    Entonces el sistema informa que la minuta no se puede aprobar debido a que el usuario no posee el número de CUIT habilitado.
+
+Escenario 4: Minuta fallida de aprobación porque la conexion con la afip no fue exitosa.
+    Dado un número de minuta “6666666666” que está pendiente de aprobar y no se pudo realizar la conexion con el servidor de la AFIP.
+    Cuando se ingresa el número de minuta “6666666666” y se presiona “aprobar”.
+    Entonces el sistema informa que la minuta no se puede aprobar debido a que no se ha podido conectar con el servidor de la AFIP.
+
+Escenario 5: Minuta fallida de aprobación debido a que el número de minuta no existe.
+    Dado un número de minuta “6666666666” que no existe.
+    Cuando se ingresa el número de minuta “6666666666” y se presiona “aprobar”.
+    Entonces el sistema informa que el número de minuta no corresponde a una minuta que está pendiente de aprobación.
+
+Historia de usuario 3
+ID: Imprimir listado.
+Título: Como empleado de rendiciones quiero imprimir un listado con las minutas para poder enviárselo al jefe de departamento.
+Reglas de negocio:
+
+Escenario 1: Listado armado exitosamente
+    Dado el listado de minutas aprobadas.
+    Cuando presiono imprimir.
+    Entonces el sistema imprime el listado e informa que la impresión se ha completado.
+
+Escenario 2: Listado vacio
+    Dado que no hay minutas aprobadas.
+    Cuando presiono imprimir.
+    Entonces el sistema no imprime el listado y nos informa que debido a que no hay  minutas aprobadas, no se puede imprimir el listado.
