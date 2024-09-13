@@ -1,0 +1,122 @@
+Historia de usuario 1
+Id: afiliacion.
+Titulo: como persona no afiliada quiero afiliarme para poder obtener los beneficios de la mutual.
+Reglas de negocio:
+    - Poseer tarjeta de credito.
+
+Criterios de aceptacion:
+    Escenario 1: afiliacion exitosa.
+    Dado una persona no afiliada que posee tarjeta de credito.
+    Cuando la persona ingresa su numero de tarjeta "1234" y presiona "Afiliar".
+    Entonces el sistema lo carga como nuevo afiliado y le entrega el numero de afiliado.
+
+    Escenario 2: afiliacion fallida por no poseer tarjeta de credito.
+    Dado una persona no afiliada que NO posee tarjeta de credito.
+    Cuando la persona ingresa su numero de tarjeta "1234" y presiona "Afiliar".
+    Entonces el sistema le informa que el numero de tarjeta ingresado no pertenece a una de credito y que por favor revise los datos.
+
+    Escenario 3: afiliacion fallida por usuario ya registrado.
+    Dado una persona ya afiliada con tarjeta de credito "1234".
+    Cuando la persona ingresa su numero de tarjeta "1234" y presiona "Afiliar".
+    Entonces el sistema le informa que no se pudo afiliar ya que el afiliado ya se encuentra cargado.
+
+
+Historia de usuario 2
+Id: agregar persona a cargo.
+Titulo: como afiliado quiero agregar una persona mas a mi grupo de afiliados para que pueda aprovechar los beneficios.
+Reglas de negocio:
+    - Los hijos pueden tener como maximo 18 anios, despues seran dados de baja.
+
+Criterios de aceptacion:
+    Escenario 1: carga de pareja exitosa.
+    Dado un afiliado con numero "123" que quiero agregar a su pareja a su grupo de afiliados.
+    Cuando la persona ingresa los datos de su pareja y presiona "Afiliar".
+    El sistema registra ese nuevo miembro del grupo de afiliados, y le entrega el numero de afiliado de la esposa.
+
+    Escenario 2: carga de hijo exitosa.
+    Dado un afiliado con numero "123" que quiero agregar a su hijo de 15 anios a su grupo de afiliados.
+    Cuando la persona ingresa los datos de su hijo y presiona "Afiliar".
+    El sistema registra ese nuevo miembro del grupo de afiliados, y le entrega el numero de afiliado de su hijo.
+
+    Escenario 3: carga de hijo fallida.
+    Dado un afiliado con numero "123" que quiero agregar a su hijo de 20 anios a su grupo de afiliados.
+    Cuando la persona ingresa  los datos de su hijo y presiona "Afiliar".
+    El sistema informa que el hijo supera los 18 anios y que no puede tenerlo a cargo como afiliado.
+
+    Escenario 4: carga de persona fallida por ya estar cargado.
+    Dado un afiliado con numero "123" que quiero agregar a una persona a su grupo de afiliados que ya se encuentra cargada en su grupo.
+    Cuando la persona ingresa los datos de la persona y presiona "Afiliar".
+    El sistema informa que la persona ya se encuentra a cargo para el numero de afiliado "123".
+
+
+Historia de usuario 3
+Id: pagar cuota de mutual automaticamente.
+Titulo: como afiliado quiero pagar la couta de la mutual automaticamente para mas comodidad.
+Reglas de negocio:
+
+
+Criterios de aceptacion:
+    Escenario 1: pago exitoso.
+    Dado un usuario con numero de tarjeta "1234" que pertenece a una tarjeta de credito y que posee saldo suficiente.
+    Cuando el usuario ingresa numero de tarjeta "1234" y presiona pagar.
+    Entonces el sistema registra el pago y le informa que el pago se realizo con exito.
+
+    // Consultar como seria la historia de usuario para el pago automatico.
+
+Historia de usuario 4:
+Id: prestacion de ortodoncia.
+Titulo: como afiliado quiero una prestacion de ortodoncia para un control.
+Reglas de negocio:
+    - Se reconoce solo una
+    - A los menores de 15 anios que esten afiliados desde al menos nueve meses.
+    - Debe presentarse historia clinica elaborado por profesional.
+
+Criterios de aceptacion:
+    Escenario 1: prestacion exitosa.
+    Dado el afiliado numero "123" con ninguna prestacion de ortodoncia, mayor a 15 anios y con historia clinica elaborado por profesional.
+    Cuando la persona ingresa el numero de afiliado "123", carga la historia clinica y presiona "Solicitar prestacion".
+    Entonces el sistema carga la solicitud, le cuenta la prestacion de ortodoncia y le otorga la prestacion al afiliado.
+
+    Escenario 2: prestacion fallida por limite de prestaciones.
+    Dado el afiliado numero "123" con 1 prestacion de ortodoncia, mayor a 15 anios y con historia clinica elaborado por profesional.
+    Cuando la persona ingresa el numero de afiliado "123", carga la historia clinica y presiona "Solicitar prestacion".
+    Entonces el sistema informa que ya llego al limite de prestaciones de ortodoncia.
+
+    Escenario 3: prestacion fallida por falta de historia clinica.
+    Dado el afiliado numero "123" con ninguna prestacion de ortodoncia, mayor a 15 anios y SIN historia clinica elaborado por profesional.
+    Cuando la persona ingresa el numero de afiliado "123" y presiona "Solicitar prestacion".
+    Entonces el sistema informa que no posee historia clinica elaborado por profesional y que revise los datos.
+
+    Escenario 4: prestacion exitosa en menor de 15 anios.
+    Dado el afiliado numero "123" con ninguna prestacion de ortodoncia, menor a 15 anios pero con 9 meses de afiliado y con historia clinica elaborado por profesional.
+    Cuando la persona ingresa el numero de afiliado "123", carga la historia clinica y presiona "Solicitar prestacion".
+    Entonces el sistema carga la solicitud, le cuenta la prestacion de ortodoncia y le otorga la prestacion al afiliado.
+
+    Escenario 5: prestacion fallida en menor de 15 anios.
+    Dado el afiliado numero "123" con ninguna prestacion de ortodoncia, menor a 15 anios pero con 3 meses de afiliado y con historia clinica elaborado por profesional.
+    Cuando la persona ingresa el numero de afiliado "123", carga la historia clinica y presiona "Solicitar prestacion".
+    Entonces el sistema le informa que al ser menor de 15 anios y no tener 9 meses de afiliacion no se puede realizar la prestacion.
+
+Historia de usuario 5
+Id: prestacion de plantilla.
+Titulo: como como afiliado quiero una prestacion de plantilla por que me duele el pie.
+Reglas de negocio:
+    - Dos por anio calendario.
+    - Presentar indicacion del profesional.
+    - Presentar factura del negocio que la confecciono.
+
+Criterios de aceptacion:
+    Escenario 1: prestacion exitosa.
+    Dado el afiliado numero "123" con ninguna prestacion de plantilla, con factura del negocio que confecciono la plantilla y con indicacion del profesional.
+    Cuando la persona ingresa el numero de afiliado "123", carga factura del negocio que confecciono la plantilla, carga la indicacion del profesional y presiona "Solicitar prestacion".
+    Entonces el sistema carga la solicitud, le cuenta la prestacion de plantilla y le otorga la prestacion al afiliado.
+
+    Escenario 2: prestacion fallida por limite de prestaciones.
+    Dado el afiliado numero "123" con dos prestaciones de plantilla en el anio actual, con factura del negocio que confecciono la plantilla y con indicacion del profesional.
+    Cuando la persona ingresa el numero de afiliado "123", carga factura del negocio que confecciono la plantilla, carga la indicacion del profesional y presiona "Solicitar prestacion".
+    Entonces el sistema le informa que ya llego al limite de prestaciones de plantilla por anio.
+
+    Escenario 3: prestacion fallida por falta de indicacion profesional.
+    Dado el afiliado numero "123" con dos prestaciones de plantilla en el anio actual, con factura del negocio que confecciono la plantilla y con indicacion del profesional.
+    Cuando la persona ingresa el numero de afiliado "123", carga factura del negocio que confecciono la plantilla, carga la indicacion del profesional y presiona "Solicitar prestacion".
+    Entonces el sistema le informa que ya llego al limite de prestaciones de plantilla por anio.

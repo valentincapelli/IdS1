@@ -1,0 +1,69 @@
+Historia de usuario 1
+Id: asociacion a la biblioteca.
+Titulo: como alumno quiero asociarme para poder pedir un prestamo de un libro.
+Reglas de negocio:
+    - Que el alumno tenga certificado de alumno regular.
+
+Criterios de aceptacion:
+    Escenario 1: asociacion exitosa.
+    Dado un dni de un alumno "1234" que no esta registrado y un certificado de alumno regular.
+    Cuando la bibliotecaria ingrese el dni "1234" y cargue el certificado de alumno regular.
+    Entonces el registra estos datos, crea el carnet virtual con su numero de socio e informa que el carnet fue creado exitosamente.
+
+    Escenario 2: asociacion fallida por alumno ya registrado.
+    Dado un dni de un alumno "1234" que SI esta registrado y un certificado de alumno regular.
+    Cuando la bibliotecaria ingrese el dni "1234" y cargue el certificado de alumno regular.
+    Entonces el sistema informara que ese numero de dni ya se encuentra cargado en el sistema.
+
+Historia de usuario 2
+Id: prestamo de libro.
+Titulo: como alumno quiero soliciar el prestamo de un libro en la biblioteca para llevarlo a mi casa.
+Reglas de negocio:
+    - Que sea un socio habilitado.
+    - Que no posea mas de tres prestamos vigentes.
+    - Que no tenga prestamos vencidos.
+
+Criterios de aceptacion:
+    Escenario 1: prestamo exitoso.
+    Dado un numero de socio "1234" habilitado, que no posee mas de tres prestamos vigentes y que no tiene prestamos vencidos.
+    Cuando la bibliotecaria ingrese el numero de socio "1234" y presione, "Prestar libros".
+    Entonces el sistema registra como prestados esos libros para ese numero de socio e informa que el prestamo fue exitoso.
+
+    Escenario 2: prestamo fallido por numero de socio inexistente.
+    Dado un numero de socio "1234" que no esta registrado.
+    Cuando la bibliotecaria ingrese el numero de socio "1234" y presione, "Prestar libros".
+    Entonces el sistema informa que ese numero de socio no esta registrado en el sistema.
+
+    Escenario 3: prestamo fallido por numero de socio inhabilitado.
+    Dado un numero de socio "1234" inhabilitado.
+    Cuando la bibliotecaria ingrese el numero de socio "1234" y presione "Prestar libros".
+    Entonces el sistema informa que ese numero de socio esta inhabilitado temporalmente y el tiempo restante inhabilitado.
+
+    Escenario 4: prestamo fallido por numero de socio con mas de tres prestamos vigentes.
+    Dado un numero de socio "1234" que tiene mas de tres prestamos vigentes.
+    Cuando la bibliotecaria ingrese el numero de socio "1234" y presione "Prestar libros".
+    Entonces el sistema informa que ese numero de socio tiene mas de 3 prestamos vigentes.
+
+    Escenario 5: prestamo fallido por numero de socio con prestamos vencidos.
+    Dado un numero de socio "1234" que tiene prestamos vencidos.
+    Cuando la bibliotecaria ingrese el numero de socio "1234" y presione "Prestar libros".
+    Entonces el sistema informa que ese numero de socio tiene prestamos vencidos.
+
+Historia de usuario 3
+Id: devolucion de prestamo.
+Titulo: como socio quiero devolver mis libros prestados para solicitar uno nuevo.
+Reglas de negocio:
+    -
+
+Criterios de aceptacion:
+    Escenario 1: devolucion exitosa.
+    Dado un numero de socio "1234" que no tiene el prestamo vencido.
+    Cuando la bibliotecaria ingrese el numero de socio "1234" y presione "Confirmar devolucion".
+    Entonces el sistema registrara la devolucion e informara que fue registado con exito.
+
+    Escenario 2: devolucion fuera de tiempo.
+    Dado un numero de socio "1234" que tiene el prestamo vencido.
+    Cuando la bibliotecaria ingrese el numero de socio "1234" y presione "Confirmar devolucion".
+    Entonces el sistema registrara la devolucion e informara que fue registado con exito pero que la devolucion esta fuera de tiempo e inhabilitara al numero de socio "1234" por 15 dias.
+
+// Consultar historia de usuario de la carga de libros.

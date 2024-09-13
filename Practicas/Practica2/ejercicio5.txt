@@ -1,0 +1,103 @@
+Historia de usuario 1
+Id: Registrar usuario
+Título: Como usuario quiero registrarme para poder encargar mis fotos impresas.
+Reglas de negocio:
+
+Escenario 1: Registro exitoso
+    Dado un usuario con mail “pepitogamer1244@gmial.com”.
+    Cuando ingresa el nombre “Pepe”, apellido “Guardiola”, mail “pepitogamer1234@gmail.com”, domicilio "San Martin 341", nombre de usuario "pepitogamer", contraseña "1234" y presiona registrarse.
+    Entonces el sistema registra el usuario e informa que el usuario se ha registrado correctamente.
+
+Escenario 2: Registro fallido porque el usuario es menor de edad
+    Dado un usuario con mail “pepitofocus@gmail.com” que es menor de edad.
+    Cuando ingresa el nombre “Pepe”, apellido “Guardiola”, mail “pepitofocus@gmail.com” y edad 17 y presiona registrarse.
+    Entonces el sistema muestra en pantalla la ley que impide la venta de bebidas alcohólicas a menores de 18 años.
+
+Historia de usuario 2
+ID: Iniciar sesión
+Título: Como usuario quiero iniciar sesión para poder encargar mis fotos.
+Reglas de negocio:
+
+Criterios de aceptación:
+Escenario 1: Inicio exitoso
+    Dado un nombre de usuario “pepitogamer” y contraseña “1234” que pertenecen a alguien registrado en el sistema.
+    Cuando la persona ingresa su nombre de usuario "pepitogamer" y contraseña "1234" y presiona enter.
+    Entonces el sistema redirige a la página principal donde se puede ver la interfaz para encargar las fotos.
+
+Escenario 2: Inicio fallido
+    Dado un nombre usuario “fabio” y contraseña “yyyyyy” que no pertenecen a alguien registrado en el sistema.
+    Cuando la persona ingresa su nombre de usuario "fabio", contraseña "yyyyyy" y presiona enter.
+    Entonces el sistema informará que el usuario o la contraseña son incorrectos.
+
+Historia de usuario 3
+ID: Cerrar sesión
+Título: Como usuario quiero cerrar sesión para salir de mi cuenta.
+Reglas de negocio:
+
+Criterios de aceptación:
+Escenario 1: Cierre exitoso
+    Dado un usuario “pepitogamer” con la sesión iniciada.
+    Cuando el usuario presiona cerrar sesión.
+    Entonces el sistema lo redirige a la página de login y sign in.
+
+Historia de usuario 4
+Id: subir foto/s.
+Titulo: como usuario quiero subir fotos para poder obtenerlas en forma fisica.
+Reglas de negocio:
+    - Como maximo se pueden subir 50 fotos.
+    - Las fotos se ingresan de a una.
+
+Criterios de aceptación:
+Escenario 1: carga exitosa.
+    Dado un usuario "leomessi" que subio 15 fotos una a una, y realizo el pago con exito.
+    Cuando el usuario presiona "Obtener codigo".
+    Entonces el sistema le entrega un codigo unico para retirar las fotos, y le muestra un boton para volver la pagina principal.
+
+Escenario 2: carga fallida por limite de fotos superado.
+    Dado un usuario "leomessi" que subio 55 fotos una a una.
+    Cuando el usuario presiona "Pagar".
+    Entonces el sistema le informa un error, diciendo que el limite de fotos para subir ha sido alcanzado, y que debe eliminar el restante de fotos que estan de mas.
+
+Escenario 3: carga fallida por error en el pago.
+    Dado un usuario "leomessi" que subio 20 fotos una a una.
+    Cuando el usuario presiona "Pagar".
+    Entonces el sistema le informa un error, diciendo que hubo un problema con el pago y lo redirige al sitio de pago.
+
+Historia de usuario 5
+Id: pagar foto/s.
+Titulo: como usuario quiero pagar las fotos para poder obtenerlas en forma fisica.
+Reglas de negocio:
+    - El pago debe realizarse con tarjeta de credito.
+
+Criterios de aceptacion:
+    Escenario 1: pago exitoso.
+    Dado un usuario con numero de tarjeta "1234" que pertenece a una tarjeta de credito, codigo de seguiridad "777" y nombre "valentin".
+    Cuando el usuario ingresa numero de tarjeta "1234", codigo de seguiridad "777", nombre "valentin" y presiona pagar.
+    Entonces el sistema registra el pago y le informa que el pago se realizo con exito.
+
+    Escenario 2: pago fallido por tarjeta invalida.
+    Dado un usuario con numero de tarjeta "1234" que NO pertenece a una tarjeta de credito, codigo de seguiridad "777" y nombre "valentin".
+    Cuando el usuario ingresa numero de tarjeta "1234", codigo de seguiridad "777", nombre "valentin" y presiona pagar.
+    Entonces el sistema le informa que el numero de tarjeta es invalido y le solicita que ingrese una tarjeta correcta.
+
+    Escenario 3: pago fallido por saldo insuficiente.
+    Dado un usuario con numero de tarjeta "1234" que pertenece a una tarjeta de credito, codigo de seguiridad "777" y nombre "valentin".
+    Cuando el usuario ingresa numero de tarjeta "1234", codigo de seguiridad "777", nombre "valentin" y presiona pagar.
+    Entonces el sistema le informa que el saldo de la tarjeta es insuficiente y que ingrese una tarjeta con saldo suficiente.
+
+Historia de usuario 6
+Id: retirar fotos.
+Titulo: como usuario quiero retirar las fotos para llevarmelas a mi casa.
+Reglas de negocio:
+    - Tener un codigo unico. // Consultar
+
+Criterios de aceptacion:
+    Escenario 1: retiro exitoso.
+    Dado un usuario "leomessi" con el codigo unico "1234".
+    Cuando el empleado ingresa el codigo "1234" y presiona "Concluir entrega".
+    Entonces el sistema registra la entrega y la fecha de retiro.
+
+    Escenario 2: retiro fallido.
+    Dado un usuario "leomessi" con el codigo unico "1234".
+    Cuando el empleado ingresa el codigo "1234" y presiona "Concluir entrega".
+    Entonces el sistema informa que el codigo unico ingresado no existe.
