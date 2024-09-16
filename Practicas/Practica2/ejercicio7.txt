@@ -54,7 +54,6 @@ Id: pagar cuota de mutual automaticamente.
 Titulo: como afiliado quiero pagar la couta de la mutual automaticamente para mas comodidad.
 Reglas de negocio:
 
-
 Criterios de aceptacion:
     Escenario 1: pago exitoso.
     Dado un usuario con numero de tarjeta "1234" que pertenece a una tarjeta de credito y que posee saldo suficiente.
@@ -62,6 +61,7 @@ Criterios de aceptacion:
     Entonces el sistema registra el pago y le informa que el pago se realizo con exito.
 
     // Consultar como seria la historia de usuario para el pago automatico.
+
 
 Historia de usuario 4:
 Id: prestacion de ortodoncia.
@@ -117,6 +117,62 @@ Criterios de aceptacion:
     Entonces el sistema le informa que ya llego al limite de prestaciones de plantilla por anio.
 
     Escenario 3: prestacion fallida por falta de indicacion profesional.
-    Dado el afiliado numero "123" con dos prestaciones de plantilla en el anio actual, con factura del negocio que confecciono la plantilla y con indicacion del profesional.
+    Dado el afiliado numero "123" con ninguna prestacion de plantilla en el anio actual, con factura del negocio que confecciono la plantilla y con indicacion del profesional.
     Cuando la persona ingresa el numero de afiliado "123", carga factura del negocio que confecciono la plantilla, carga la indicacion del profesional y presiona "Solicitar prestacion".
-    Entonces el sistema le informa que ya llego al limite de prestaciones de plantilla por anio.
+    Entonces el sistema le informa que le falta cargar la indicacion del profesional.
+
+    Escenario 4: prestacion fallida por falta de factura del negocio que la confecciono.
+    Dado el afiliado numero "123" con ninguna prestacion de plantilla en el anio actual, SIN factura del negocio que confecciono la plantilla y con indicacion del profesional.
+    Cuando la persona ingresa el numero de afiliado "123", carga la indicacion del profesional y presiona "Solicitar prestacion".
+    Entonces el sistema le informa que le falta cargar la factura del negocio que confecciono la plantilla.
+
+Historia de usuario 6
+Id: prestacion de anteojos.
+Titulo: como afiliado quiero una prestacion de anteojos para mejorar mi vision a larga distancia.
+Reglas de negocio:
+    - Afiliados con fecha de afiliacion superior a 3 meses.
+    - Un par cada 18 meses.
+
+Criterios de aceptacion:
+    Escenario 1: prestacion exitosa.
+    Dado el afiliado numero "123" con fecha de afiliacion de hace 8 meses y sin prestaciones de anteojos en los ultimos 18 meses.
+    Cuando el afiliado ingrese el numero de afiliado "123" y selecciona "Solicitar prestacion de anteojos".
+    Entonces el sistema carga la solicitud, registra la prestacion de anteojos y le otorga la prestacion al afiliado.
+
+    Escenario 2: prestacion fallida por afiliacion menor a 3 meses.
+    Dado el afiliado numero "123" con fecha de afiliacion de hace 2 meses y sin prestaciones de anteojos en los ultimos 18 meses.
+    Cuando el afiliado ingrese el numero de afiliado "123" y selecciona "Solicitar prestacion de anteojos".
+    Entonces el sistema informa que el numero de afiliado "123" no supera los 3 meses de afiliacion y no puede solicitar la prestacion.
+
+    Escenario 3: prestacion fallida por alcanzar limite de pares.
+    Dado el afiliado numero "123" con fecha de afiliacion de hace 8 meses y con 1 prestacion de anteojos en los ultimos 18 meses.
+    Cuando el afiliado ingrese el numero de afiliado "123" y selecciona "Solicitar prestacion de anteojos".
+    Entonces el sistema informa que ha alcanzado el limite de prestaciones de anteojos en los ultimos 18 meses y que no podra solicitar la prestacion.
+
+Historia de usuario 7:
+Id: prestacion de internacion.
+Titulo: como afiliado quiero una prestacion de internacion para realizarme una operacion.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: prestacion exitosa.
+    Dado el afiliado numero "123".
+    Cuando el afiliado ingrese el numero de afiliado "123" y selecciona "Solicitar prestacion de internacion".
+    Entonces el sistema carga la solicitud, registra la prestacion de internacion y le otorga la prestacion al afiliado.
+
+Historia de usuario 8:
+Id: prestacion de consulta medica.
+Titulo: como afiliado quiero una prestacion de consulta medica para tratar una gripe.
+Reglas de negocio:
+    - Limite de 2 por mes.
+
+Criterios de aceptacion:
+    Escenario 1: prestacion exitosa.
+    Dado el afiliado numero "123".
+    Cuando el afiliado ingrese el numero de afiliado "123" y selecciona "Solicitar prestacion de consulta medica".
+    Entonces el sistema carga la solicitud, registra la prestacion de consulta medica y le otorga la prestacion al afiliado.
+
+    Escenario 1: prestacion fallida por limite de consultas por mes alcanzado.
+    Dado el afiliado numero "123".
+    Cuando el afiliado ingrese el numero de afiliado "123" y selecciona "Solicitar prestacion de internacion".
+    Entonces el sistema le informa que ha alcanzado el limite de prestaciones por mes y que no podra solicitar una nueva.
