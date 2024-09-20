@@ -1,0 +1,60 @@
+a) El desarrollo centrado en el usuario (DCU) es una metodología de diseño y 
+desarrollo de productos, servicios o sistemas que pone al usuario final en el centro 
+de todo el proceso. Su objetivo es crear soluciones que satisfagan de manera efectiva 
+las necesidades, expectativas y preferencias de los usuarios, asegurando que el 
+producto sea fácil de usar y les aporte valor.
+
+b) Casos  de uso: proceso de modelado de las “funcionalidades” del sistema en términos 
+de los eventos que interactúan entre los usuarios y el sistema. El uso de CU facilita y 
+alienta la participación de los usuarios.
+
+Diagrama de Casos de Uso
+Ilustra las interacciones entre el sistema y los actores.
+
+Consiste en un diagrama donde tenemos el sistema y dentro de el cada uno de los CU.
+Por fuera del sistema esta graficado la figura de los usuarios interactuando con uno
+o mas de los CU. Se usa para representar como cada uno de los distintos actores
+(usuarios con distintos roles) van a interactuar con los CU del sistema(acciones).
+
+Representa un objetivo (funcionalidad) individual del sistema y describe la secuencia de actividades
+y de interacciones para alcanzarlo. Para que el CU sea considerado un requerimiento 
+debe estar acompañado de su respectivo escenario.
+
+c) Actores
+Un actor inicia una actividad (CU) en el sistema. 
+Representa un papel desempeñado por un usuario que interactúa (rol).
+Puede ser una persona, sistema externo o dispositivo externo que dispare un evento 
+(sensor, reloj).
+
+Escenarios (narración del CU)
+Descripción de la interacción entre el actor  y el sistema para realizar la 
+funcionalidad.
+
+d) Relaciones
+    Asociaciones 
+        Relación entre un actor y un CU en el que interactúan entre sí.
+        El Actor inicia el caso de uso 
+        El caso de uso interacciona con actor 
+
+    Extensiones (Extends)
+        Un CU extiende la funcionalidad de otro CU.
+        Un CU puede tener muchos CU extensiones.
+        Los CU extensiones sólo son iniciados por un CU.
+
+    Uso o Inclusión  (Uses)
+        Reduce la redundancia entre dos o más CU al combinar los pasos comunes de los 
+        CU.
+
+    Herencia
+        Relación entre actores donde un actor hereda las funcionalidades de uno o 
+        varios actores. 
+
+e) Beneficios:
+    Herramienta para capturar requerimientos funcionales.
+    Descompone el alcance del sistema en piezas más manejables.
+    Medio de comunicación con los usuarios.
+    Utiliza lenguaje común y fácil de entender por las partes.
+    Permite estimar el alcance del proyecto y el esfuerzo a realizar.
+    Define una línea base para la definición de los planes de prueba.
+    Define una línea base para toda la documentación del sistema.
+    Proporciona una herramienta para el seguimiento de los requisitos.
