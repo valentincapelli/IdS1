@@ -122,3 +122,63 @@ Curso alterno:
 
 Postcondicion: la sesion ha sido cerrada, las opciones para el alumno no registrado
 han sido deshabilitadas y se eliminan los datos de sesion.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: inscripcion.
+Descripcion: este caso de uso describe el evento en el que un alumno registrado se
+inscribe a una carrera.
+
+Actores: alumno registrado.
+
+Precondiciones: el usuario tiene la sesion iniciada.
+
+Curso normal:
+    Accion del actor:
+        Paso 2: el alumno selecciona la carrera a la que se quiere inscribir.
+        Paso 4: el alumno ingresa los datos solicitados.
+    Accion del sistema:
+        Paso 1: el sistema muestra en pantalla el catalogo de carreras en las que
+        no esta inscripto.
+        Paso 3: el sistema le pide que ingrese ingrese la cantidad de cuotas
+        a pagar y el número de tarjeta.
+        Paso 5: se ejecuta el caso de Pagar con Tarjeta.
+        Paso 6: se registra la inscripcion a la carrera, y se imprime el 
+        comprobante de inscripcion y de pago.
+
+Curso alterno:
+    Paso 5: se produce un error en el CU Pagar con tarjeta y se informa del error. 
+    Fin del CU.
+    Paso 1: el sistema muestra en pantalla que no tiene mas carreras para inscribirse.
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: pagar con tarjeta.
+Descripcion: este caso de uso describe el cobro de una carrera mediante una tarjeta.
+
+Actores: servidor externo.
+
+Precondiciones: se debe haber ejecutado el CU Inscribirse.
+
+Curso normal:
+    Accion del actor:
+        Paso 2: el servidor externo acepta la conexion.
+        Paso 4: el servidor externo valida los datos y fondos suficientes.
+        Paso 5: se realiza el cobro y envia resultado al sistema.
+
+    Accion del sistema:
+        Paso 1: el sistema solicita conexion con el servidor externo.
+        Paso 3: el sistema le envia los datos de la tarjeta.
+        Paso 6: el sistema recibe que los datos de la tarjeta son correctos.
+        Paso 7: el sistema recibe que los fondos son suficientes.
+        Paso 8: el sistema registra el pago y cierra la conexión con el servidor externo
+
+Curso alterno:
+    Paso 1: fallo la conexion.
+    Paso 5: falla en los datos de la tarjeta o fondos insuficientes y envia 
+    el resultado al sistema.
+    Paso 6: el sistema recibe que lo datos de la tarjeta son incorrectos y lo informa.  
+    Paso 7: el sistema recibe que los fondos son insuficientes y lo informa.
+
+Post condicion: se efectuo y registro el pago a traves de tarjeta.
+
+Las reglas de negocio ahora son los cursos alternos.
