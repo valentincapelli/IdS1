@@ -1,0 +1,142 @@
+Historia de usuario 1:
+Id: reserva de entradas.
+Titulo: como espectador quiero reservar una entrada para asegurarme asistir a la obra de teatro.
+Reglas de negocio:
+    - Solo de modo personal en el teatro.
+    - Se pueden reservar hasta 2 entradas.
+    - Las entradas reservadas no compradas caducarán tres horas antes del evento.
+
+Criterios de aceptacion:
+    Escenario 1: reserva exitosa.
+    Dado un espectador llamado "Leo Messi", dni "12345" y una obra de nombre "Don Quijote", fecha "14/09/2024" y hora "19hs" que reserva 2 entradas.
+    Cuando el empleado registra el nombre del espectador "Leo Messi", dni "12345" y la obra de nombre "Don Quijote", fecha "14/09/2024" y hora "19hs" y 2 entradas reservadas.
+    Entonces el sistema registra la reserva e informa que la reserva se realizo exitosamente.
+
+    Escenario 2: reserva fallida.
+    Dado un espectador llamado "Leo Messi", dni "12345" y una obra de nombre "Don Quijote", fecha "14/09/2024" y hora "19hs" que reserva 2 entradas y que no hay mas entradas disponibles.
+    Cuando el empleado registra el nombre del espectador "Leo Messi", dni "12345" y la obra de nombre "Don Quijote", fecha "14/09/2024" y hora "19hs" y 2 entradas reservadas.
+    Entonces el sistema informa que no se pudo realizar la reserva porque no hay mas entradas disponibles.
+
+Historia de usuario 2:
+Id: comprar entrada via web.
+Titulo: como espectador quiero comprar entradas via web para no tener que ir hasta el teatro.
+Reglas de negocio:
+    - El pago se realiza con tarjeta de credito.
+
+Criterios de aceptacion:
+    Escenario 1: compra exitosa.
+    Dado un espectador con dni "123", una obra llamada "Don Quijote" y cantidad de entradas disponibles 100.
+    Cuando el espectador ingresa su dni "123", seleccion la obra "Don Quijote", solicita 3 lugares y presiona "Pagar".
+    Entonces el sistema procede a mostrar los pasos para el pago y de completarse exitosamente, imprime un codigo de compra.
+
+    Escenario 2: compra fallida por insuficiencia de entradas disponibles.
+    Dado un espectador con dni "123", una obra llamada "Don Quijote" y cantidad de entradas disponibles 1.
+    Cuando el espectador ingresa su dni "123", seleccion la obra "Don Quijote", solicita 3 lugares y presiona "Pagar".
+    Entonces el sistema informa que no se pudo realizar la compra porque no hay suficientes lugares disponibles.
+
+    Escenario 3: compra fallida por problema en el pago.
+    Dado un espectador con dni "123", una obra llamada "Don Quijote", cantidad de entradas disponibles 100 y algun tipo de problema relacionado con el pago.
+    Cuando el espectador ingresa su dni "123", seleccion la obra "Don Quijote", solicita 3 lugares y presiona "Pagar".
+    Entonces el sistema informa que no se pudo realizar la compra por un problema con el pago de las entradas.
+
+Historia de usuario 3
+Id: pagar entradas.
+Titulo: como usuario quiero pagar las entradas para poder obtenerlas de forma virtual.
+Reglas de negocio:
+    - El pago debe realizarse con tarjeta de credito.
+
+Criterios de aceptacion:
+    Escenario 1: pago exitoso.
+    Dado un usuario con numero de tarjeta "1234" que pertenece a una tarjeta de credito, codigo de seguridad "777" y vencimiento "14/09/2024".
+    Cuando el usuario ingresa numero de tarjeta "1234", codigo de seguiridad "777", vencimiento "14/09/2024" y presiona pagar.
+    Entonces el sistema registra el pago, le informa que el pago se realizo con exito y se emite el código de compra.
+
+    Escenario 2: pago fallido por tarjeta invalida.
+    Dado un usuario con numero de tarjeta "1234" que NO pertenece a una tarjeta de credito, codigo de seguridad "777" y vencimiento "14/09/2024".
+    Cuando el usuario ingresa numero de tarjeta "1234", codigo de seguiridad "777", vencimiento "14/09/2024" y presiona pagar.
+    Entonces el sistema informa que el numero de tarjeta ingresado no pertence a una tarjeta de credito.
+
+    Escenario 3: pago fallido por saldo insuficiente.
+    Dado un usuario con numero de tarjeta "1234" que pertenece a una tarjeta de credito, codigo de seguridad "777" y vencimiento "14/09/2024".
+    Cuando el usuario ingresa numero de tarjeta "1234", codigo de seguiridad "777", vencimiento "14/09/2024" y presiona pagar.
+    Entonces el sistema informa que la tarjeta no tiene saldo suficiente para realizar el pago.
+
+    Escenario 4: pago fallido por codigo de seguridad erroneo.
+    Dado un usuario con numero de tarjeta "1234" que pertenece a una tarjeta de credito, codigo de seguridad "777" que no es correcto y vencimiento "14/09/2024".
+    Cuando el usuario ingresa numero de tarjeta "1234", codigo de seguiridad "777", vencimiento "14/09/2024" y presiona pagar.
+    Entonces el sistema informa que los datos de la tarjeta no son correctos.
+
+    Escenario 5: pago fallido por vencimiento erroneo.
+    Dado un usuario con numero de tarjeta "1234" que pertenece a una tarjeta de credito, codigo de seguridad "777"  y vencimiento "14/09/2024" que no es correcto.
+    Cuando el usuario ingresa numero de tarjeta "1234", codigo de seguiridad "777", vencimiento "14/09/2024" y presiona pagar.
+    Entonces el sistema informa que los datos de la tarjeta no son correctos.
+
+Historia de usuario 4:
+Id: comprar entradas personalmente.
+Titulo: como espectador quiero comprar las entradas personalmente para asistir a la obra.
+Reglas de negocio:
+    - El pago es unicamente con tarjeta de credito.
+
+Criterios de aceptacion:
+    Escenario 1: compra exitosa.
+    Dado un espectador con dni "123", una obra llamada "Don Quijote" y cantidad de entradas disponibles 100.
+    Cuando el vendedor ingresa el dni "123", selecciona la obra "Don Quijote", solicita 3 lugares y presiona "Pagar".
+    Entonces el sistema procede a mostrar los pasos para el pago y de completarse exitosamente, imprime las entradas.
+
+    Escenario 2: compra fallida por insuficiencia de entradas disponibles.
+    Dado un espectador con dni "123", una obra llamada "Don Quijote" y cantidad de entradas disponibles 1.
+    Cuando el vendedor ingresa dni "123", seleccion la obra "Don Quijote", solicita 3 lugares y presiona "Pagar".
+    Entonces el sistema informa que no se pudo realizar la compra porque no hay suficientes lugares disponibles.
+
+    Escenario 3: compra fallida por problema en el pago.
+    Dado un espectador con dni "123", una obra llamada "Don Quijote", cantidad de entradas disponibles 100 y algun tipo de problema relacionado con el pago.
+    Cuando el vendedor ingresa dni "123", seleccion la obra "Don Quijote", solicita 3 lugares y presiona "Pagar".
+    Entonces el sistema informa que no se pudo realizar la compra por un problema con el pago de las entradas.
+
+Historia de usuario 5:
+Id: retirar entradas reservadas.
+Titulo: como espectador quiero retirar las entradas reservadas para poder asistir a la obra.
+Reglas de negocio:
+    - Que la reserva no este caducada.
+
+Criterios de aceptacion:
+    Escenario 1: retiro exitoso.
+    Dado un espectador con dni "123" y nombre "Leo Messi".
+    Cuando el empleado ingresa el dni "123" y nombre "Leo Messi".
+    Entonces el sistema valida la reserva, procede con los pasos del pago, y de completarse exitosamente, imprime las entradas.
+
+    Escenario 2: retiro fallido por reserva caducada.
+    Dado un espectador con dni "123", nombre "Leo Messi" y con la reserva ya caducada.
+    Cuando el empleado ingresa el dni "123" y nombre "Leo Messi".
+    Entonces el sistema chequea la reserva, e informa que la reserva ya esta caducada.
+
+    Escenario 3: retiro fallido por reserva inexistente.
+    Dado un espectador con dni "123" y nombre "Leo Messi" que no realizo ninguna reserva.
+    Cuando el empleado ingresa el dni "123" y nombre "Leo Messi".
+    Entonces el sistema informa que no existe una reserve correspondientes a esos datos.
+
+Historia de usuario 6:
+Id: retiro de entradas online.
+Titulo: como espectador quiero retirar mis entradas compradas via online para poder asistir a la obra.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: retiro de entradas exitoso.
+    Dado un codigo de compra numero "123" existente.
+    Cuando el vendedor ingresa el codigo de compra "123".
+    El sistema verifica que existe este codigo de compra, e imprime las entradas.
+
+    Escenario 1: retiro de entradas fallido.
+    Dado un codigo de compra numero "123" inexistente.
+    Cuando el vendedor ingresa el codigo de compra "123".
+    El sistema verifica si existe este codigo de compra, e informa que no ese codigo de compra no es valido.
+
+Historia de usuario 8:
+Id: programacion de obras.
+Titulo: como administrador quiero ingresar la distribución semanal de las obras para la realización de la venta de entradas.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: programacion exitosa.
+    
+    // Consultar
