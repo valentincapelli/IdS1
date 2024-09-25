@@ -1,0 +1,124 @@
+Actores:
+    Alumnos.
+    Empleado administrativo.
+
+Casos de uso: 
+    Cargar las carreras.
+    Registro.
+    Iniciar sesion.
+    Cerrar sesion.
+    Incripcion.
+    Pago.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: carga de carreras.
+Descripcion: este caso de uso describe el evento en el que el empleado administrativo 
+carga las carreras.
+
+Actores: empleado administrativo.
+
+Precondiciones: 
+
+Curso normal: 
+    Accion del Actor: 
+        Paso 1: el empleado administrativo presiona "Cargar carrera".
+        Paso 3: el empleado administrativo ingresa los datos solicitados.
+
+    Accion del sistema: 
+        Paso 2: el sistema le solicita que ingrese el nombre de la carrera, duracion en
+        anios, costo, y cantidad maxima de cuotas para el pago.
+        Paso 4: el sistema carga la carrera exitosamente y lo informa en pantalla.
+
+Curso alterno:
+    Paso 4: el sistema informa que el nombre de la carrera ingresado ya se encuentra
+    cargado y que la carga no se pudo realizar.
+    Paso 4: el sistema informa que la duracion de la carrera supera los 5 anios y que
+    la carga no se pudo realizar.
+
+Post condicion: las carreras se encuentran cargadas en el sistema.   
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: iniciar sesion.
+Descripcion: este caso de uso describe el evento en el que un alumno registrado inicia 
+sesion.
+
+Actores: alumno registrado.
+
+Precondiciones: 
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el alumno registrado selecciona la opcion de iniciar sesion.
+        Paso 3: el alumno registrado ingresa el usuario y contrasenia.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita usuario y contrasenia.
+        Paso 4: el sistema verifica los datos ingresados.
+        Paso 5: el sistema registra la sesión iniciada y habilita las acciones del alumno
+        registrado.
+
+Curso alterno:
+    Paso alternativo 4: el usuario o contrasenia no son validos. Se notifica la discrepancia.
+    Retoma desde el paso 2.
+
+Postcondicion: la sesion ha sido iniciada y las opciones para el alumno registrado 
+aparecen habilitadas.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: cerrar sesion.
+Descripcion: este caso de uso describe el evento en el que un alumno registrado 
+cierra sesion.
+
+Actores: alumno registrado.
+
+Precondiciones: el alumno registrado debe haber iniciado sesion.
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el alumno registrado selecciona la opcion de cerrar sesion.
+        Paso 3: el alumno registrado confirma la operacion.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita la confirmacion del alumno registrado.
+        Paso 4: el sistema cierra la sesion y deshabilita las opciones de alumno
+        registrado.
+
+Curso alterno:
+    Paso alternativo 3: el alumno registrado cancela la operacion. Fin del CU.
+
+Postcondicion: la sesion ha sido cerrada, las opciones para el alumno registrado
+han sido deshabilitadas y se eliminan los datos de sesion.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: registrar alumno.
+Descripcion: este caso de uso describe el evento en el que un alumno no registrado 
+se registra.
+
+Actores: alumno no registrado.
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el alumno no registrado selecciona la opcion de registrarse.
+        Paso 3: el alumno no registrado ingresa los datos.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese nombre, apellido, nombre de usuario
+        y contraseña.
+        Paso 4: el sistema verifica que el nombre de usuario sea unico y que la
+        contrasenia tenga mas de 6 digitos.
+        Paso 5: registra el alta del nuevo usuario.
+
+Curso alterno:
+    Paso alternativo 4: ya existe un usuario con el mismo nombre. Se notifica.
+    Volver al paso 3.
+    Paso alternativo 4: la contrasenia no tiene mas de 6 digitos. Se notifica.
+    Volver al paso 3.
+
+Postcondicion: la sesion ha sido cerrada, las opciones para el alumno no registrado
+han sido deshabilitadas y se eliminan los datos de sesion.

@@ -1,0 +1,133 @@
+Nombre del caso de uso: carga de muebles.
+Descripcion: este caso de uso describe el evento en el que el encargado carga los
+muebles.
+
+Actores: encargado.
+
+Precondiciones: el encargado debe iniciar sesion.
+
+Curso normal: 
+    Accion del Actor: 
+        Paso 1: el encargado presiona "Subir mueble".
+        Paso 3: el encargado ingresa los datos solicitados.
+
+    Accion del sistema: 
+        Paso 2: el sistema le solicita que ingrese el código de inventario, tipo de 
+        mueble, fecha de creación, fecha de último mantenimiento, estado (libre, de 
+        baja, alquilado) y el precio de alquiler del mueble.
+        Paso 4: el sistema carga el mueble exitosamente y lo informa en pantalla.
+
+Curso alterno:
+    Paso 4: el sistema informa que el codigo de inventario ingresado ya se encuentra
+    cargado y que la carga no se pudo realizar.
+
+Post condicion: el mueble se encuentra cargado en la web.   
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: alquiler.
+Descripcion: este caso de uso describe el evento en el que un cliente alquila un mueble
+a traves de la aplicacion.
+
+Actores: cliente.
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el cliente seleccion la opcion "Alquilar mueble".
+        Paso 3: el cliente ingresa los datos solicitados.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese una fecha, lugar del evento, cantidad 
+        de días y mobiliario junto a su cantidad.
+        Paso 4: el sistema ejecuta el caso de uso Pagar con tarjeta.
+        Paso 5: el sistema registra la reserva e informa que se reservo exitosamente.
+
+Curso alterno:
+    Paso 4: el sistema informa que la cantidad minima de muebles por reserva no es
+    superior a 3. Se le notifica que revise los datos.
+    Paso 5: el pago no se realiza. Se notifica al usuario. Fin de CU.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: pagar con tarjeta.
+Descripcion: este caso de uso describe el cobro de una reserva mediante una tarjeta.
+
+Actores: servidor externo, cliente.
+
+Precondiciones: se debe haber ejecutado el CU "Alquiler".
+
+Curso normal:
+    Accion del actor:
+        Paso 2: el cliente ingresa los datos.
+        Paso 4: el servidor externo acepta la conexión y solicita número de tarjeta
+         y código de seguridad
+        Paso 6: el servidor externo valida los datos y fondos suficientes.
+        Paso 7: el servidor externo retorna el resultado.
+
+
+    Accion del sistema:
+        Paso 1: el sistema solicita el numero de tarjeta y el codigo de seguridad.
+        Paso 3: el sistema solicita conexion con el servidor externo.
+        Paso 5: el sistema envía los datos de la tarjeta al servidor externo.
+        Paso 8: el sistema recibe que los datos de la tarjeta son correctos.
+        Paso 9: el sistema recibe que los fondos son suficientes.
+        Paso 10: el sistema registra el pago y cierra la conexión con el servidor externo
+
+Curso alterno:
+        Paso alternativo 3: Falla la conexión con el servidor externo. Se informa el error. Fin de CU.
+        Paso alternativo 8: La validación de datos es incorrecta. Se informa error en los datos de la tarjeta. Fin de CU.
+        Paso alternativo 9: Fondos insuficientes. Se informa fondos insuficientes. Fin de CU.
+
+Postcondicion: se efectuo y registro el pago a traves de tarjeta.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: iniciar sesion.
+Descripcion: este caso de uso describe el evento en el que un encargado inicia sesion.
+
+Actores: encargado.
+
+Precondiciones: el encargado debe estar registrado.
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el encargado selecciona la opcion de iniciar sesion.
+        Paso 3: el encargado ingresa el usuario y contrasenia.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita usuario y contrasenia.
+        Paso 4: el sistema verifica los datos ingresados.
+        Paso 5: el sistema registra la sesión iniciada y habilita las acciones del encargado.
+
+Curso alterno:
+    Paso alternativo 4: el usuario o contrasenia no son validos. Se notifica la discrepancia.
+    Retoma desde el paso 2.
+
+Postcondicion: la sesion ha sido iniciada y las opciones para el encargado aparecen
+habilitadas.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: cerrar sesion.
+Descripcion: este caso de uso describe el evento en el que un encargado cierra sesion.
+
+Actores: encargado.
+
+Precondiciones: el encargado debe haber iniciado sesion.
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el encargado selecciona la opcion de cerrar sesion.
+        Paso 3: el encargado confirma la operacion.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita la confirmacion del encargado.
+        Paso 4: el sistema cierra la sesion y deshabilita las opciones de encargado.
+
+Curso alterno:
+    Paso alternativo 3: el encargado cancela la operacion. Fin del CU.
+
+Postcondicion: la sesion ha sido cerrada, las opciones para el encargado han sido
+deshabilitadas y se eliminan los datos de sesion.
