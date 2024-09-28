@@ -1,0 +1,96 @@
+Actores:
+    Persona.
+    Operador.
+
+Casos de uso:
+    Reciclar.
+    Solicitar listado.
+    Actualizar montos.
+
+--------------------------------------------------------------------------
+
+Nombre del caso de uso: reciclar.
+Descripcion: este caso de uso describe el evento en el que una persona solicita
+reciclar a la maquina lo que puso en el recipiente.
+
+Actores: persona.
+
+Precondiciones: 
+
+Curso normal: 
+    Accion del Actor: 
+        Paso 1: la persona pone en el recipiento lo que quiere reciclar.
+        Paso 2: la persona presiona "Reciclar".
+
+    Accion del sistema: 
+        Paso 3: el sistema detecta el tipo de material.
+        Paso 4: el sistema detecta el peso.
+        Paso 5: el sistema imprime el recibo con el monto total que se le debe
+        pagar a la persona por lo reciclado.
+        
+Curso alterno:
+    Paso 3: se informa un error, diciendo que no se detecto el tipo de material.
+    Se aborta el proceso retornando el producto. Fin del CU.  
+
+Post condicion: se recicla lo puesto en el recipiento y la persona obtiene su
+ticket.
+
+--------------------------------------------------------------------------
+
+Nombre del caso de uso: solicitar listado.
+Descripcion: este caso de uso describe el evento en el que un operador solicita
+un listado con los tipos de materiales reciclados en un periodo de fechas
+determinado, detallando además el total abonado por dicho material.
+
+Actores: operador.
+
+Precondiciones: 
+
+Curso normal: 
+    Accion del Actor: 
+        Paso 1: el operador presiona "Solicitar listado"
+        Paso 3: el operador ingresa los datos solicitados.
+
+    Accion del sistema: 
+        Paso 2: el sistema le pide que ingrese el periodo de fechas que quiere
+        el listado.
+        Paso 4: el sistema verifica que las fechas tengan sentido.
+        Paso 5: el sistema muestra en pantalla el listado.
+        
+Curso alterno:
+    Paso 4: el sistema notifica que las fechas ingresadas no son correctas,
+    y que revise las fechas ingresadas. Vuelve al paso 2.
+
+Post condicion: el sistema muestra en pantalla el listado en ese periodo de
+tiempo.
+
+--------------------------------------------------------------------------
+
+Nombre del caso de uso: actualizar monto.
+
+Descripcion: este caso de uso describe el evento en el que un operador solicita
+actualizar los montos a pagar por kilo de cada tipo de material que la máquina 
+puede reciclar.
+
+Actores: operador.
+
+Precondiciones: 
+
+Curso normal: 
+    Accion del Actor: 
+        Paso 1: el operador presiona "Actualizar montos"
+        Paso 3: el operador selecciona el material.
+        Paso 5: el operador ingresa el nuevo monto.
+        Paso 7: el operador presiona "Aceptar".
+
+    Accion del sistema: 
+        Paso 2: el sistema le pide que seleccione el tipo de material a actualizar.
+        Paso 4: el sistema le solicita el nuevo monto.
+        Paso 6: el sistema le pregunta si quiere confirmar la actualizacion.
+        Paso 8: el sistema actualiza el monto y lo informa en pantalla.
+
+Curso alterno:
+    Paso 7: el sistema informa el error que no se acepto la actualizacion.
+    Fin del CU.
+
+Post condicion: el sistema actualiza el monto de un material.
