@@ -120,8 +120,7 @@ Curso alterno:
     Paso alternativo 4: la contrasenia no tiene mas de 6 digitos. Se notifica.
     Volver al paso 3.
 
-Postcondicion: la sesion ha sido cerrada, las opciones para el alumno no registrado
-han sido deshabilitadas y se eliminan los datos de sesion.
+Postcondicion: un alumno no registrado ha sido registrado.
 
 ---------------------------------------------------------------------------------------
 
@@ -150,35 +149,56 @@ Curso alterno:
     Paso 5: se produce un error en el CU Pagar con tarjeta y se informa del error. 
     Fin del CU.
     Paso 1: el sistema muestra en pantalla que no tiene mas carreras para inscribirse.
+
 ---------------------------------------------------------------------------------------
 
-Nombre del caso de uso: pagar con tarjeta.
-Descripcion: este caso de uso describe el cobro de una carrera mediante una tarjeta.
+Nombre del caso de uso: pago con tarjeta.
+Descripcion: este caso de uso describe el cobro de las fotos mediante una tarjeta.
 
-Actores: servidor externo.
+Actores: servidor externo, cliente.
 
-Precondiciones: se debe haber ejecutado el CU Inscribirse.
+Precondiciones: se debe haber ejecutado el CU subir fotos.
 
 Curso normal:
     Accion del actor:
-        Paso 2: el servidor externo acepta la conexion.
-        Paso 4: el servidor externo valida los datos y fondos suficientes.
-        Paso 5: se realiza el cobro y envia resultado al sistema.
+        Paso 2: el cliente ingresa los datos.
+        Paso 4: el servidor externo acepta la conexión.
+        Paso 6: el servidor externo valida los datos y fondos suficientes.
+        Paso 7: el servidor externo retorna el resultado.
+
 
     Accion del sistema:
-        Paso 1: el sistema solicita conexion con el servidor externo.
-        Paso 3: el sistema le envia los datos de la tarjeta.
-        Paso 6: el sistema recibe que los datos de la tarjeta son correctos.
-        Paso 7: el sistema recibe que los fondos son suficientes.
-        Paso 8: el sistema registra el pago y cierra la conexión con el servidor externo
+        Paso 1: el sistema solicita el número de tarjeta, código de seguridad y nombre 
+        del titular.
+        Paso 3: el sistema solicita conexion con el servidor externo.
+        Paso 5: el sistema envía los datos de la tarjeta al servidor externo.
+        Paso 8: el sistema recibe que los datos de la tarjeta son correctos.
+        Paso 9: el sistema recibe que los fondos son suficientes.
+        Paso 10: el sistema registra el pago y cierra la conexión con el servidor externo
 
 Curso alterno:
-    Paso 1: fallo la conexion.
-    Paso 5: falla en los datos de la tarjeta o fondos insuficientes y envia 
-    el resultado al sistema.
-    Paso 6: el sistema recibe que lo datos de la tarjeta son incorrectos y lo informa.  
-    Paso 7: el sistema recibe que los fondos son insuficientes y lo informa.
+        Paso alternativo 3: falla la conexión con el servidor externo. Se informa el error. Fin de CU.
+        Paso alternativo 8: la validación de datos es incorrecta. Se informa error en los datos de la tarjeta. Fin de CU.
+        Paso alternativo 9: fondos insuficientes. Se informa fondos insuficientes. Fin de CU.
 
-Post condicion: se efectuo y registro el pago a traves de tarjeta.
+Postcondicion: se efectuo y registro el pago a traves de tarjeta.
 
-Las reglas de negocio ahora son los cursos alternos.
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: retiro de fotos.
+Descripcion:
+
+Actores:
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        
+
+
+    Accion del sistema:
+        
+Curso alterno:
+        
+Postcondicion:

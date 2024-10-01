@@ -1,0 +1,144 @@
+Actores:
+    Clientes.
+    Empleado.
+
+Casos de uso:
+    Iniciar sesion.
+    Cerrar sesion.
+    Registrarse.
+    Subir fotos.
+    Pago con tarjeta.
+    Retiro de fotos.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: registrarse.
+Descripcion: este caso de uso describe el evento en el que un cliente no registrado 
+se registra.
+
+Actores: cliente no registrado.
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el cliente no registrado selecciona la opcion de registrarse.
+        Paso 3: el cliente no registrado ingresa los datos.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese nombre, apellido, email, domicilio, 
+        nombre de usuario y contraseña.
+        Paso 4: se registra el alta del nuevo usuario y se informa en pantalla.
+
+Curso alterno:
+    
+
+Postcondicion: un cliente no registrado fue registrado.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: iniciar sesion.
+Descripcion: este caso de uso describe el evento en el que un cliente inicia sesion.
+
+Actores: cliente.
+
+Precondiciones: el cliente debe haberse registrado.
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el cliente selecciona la opcion de iniciar sesion.
+        Paso 3: el cliente ingresa el usuario y contrasenia.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita usuario y contrasenia.
+        Paso 4: el sistema verifica los datos ingresados.
+        Paso 5: el sistema registra la sesión iniciada y habilita las acciones del cliente.
+
+Curso alterno:
+    Paso alternativo 4: el usuario o contrasenia no son validos. Se notifica la discrepancia.
+    Retoma desde el paso 2.
+
+Postcondicion: la sesion ha sido iniciada y las opciones para el cliente aparecen 
+habilitadas.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: cerrar sesion.
+Descripcion: este caso de uso describe el evento en el que un cliente cierra sesion.
+
+Actores: cliente.
+
+Precondiciones: el cliente debe haber iniciado sesion.
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el cliente selecciona la opcion de cerrar sesion.
+        Paso 3: el cliente confirma la operacion.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita la confirmacion del cliente.
+        Paso 4: el sistema cierra la sesion y deshabilita las opciones de cliente.
+
+Curso alterno:
+    Paso alternativo 3: el cliente cancela la operacion. Fin del CU.
+
+Postcondicion: la sesion ha sido cerrada, las opciones para el cliente han sido 
+deshabilitadas y se eliminan los datos de sesion.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: subir fotos.
+Descripcion: este caso de uso describe el evento en el que un cliente sube fotos.
+
+Actores: cliente.
+
+Precondiciones: el cliente debe haber iniciado sesion.
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el cliente selecciona la opcion subir fotos.
+        Paso 3: el cliente sube sus fotos.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese las fotos de a una.
+        Paso 4: el sistema verifica que sean menos de 50 fotos las subidas.
+        Paso 4: el sistema registra las fotos.
+
+Curso alterno:
+    Paso alternativo 4: el sistema notifica que se excedio el limite de fotos subidas.
+    Le pide que elimine la cantidad de fotos por las que se excedio.
+
+Postcondicion: las fotos fueron subidas y registradas.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: pagar con tarjeta.
+Descripcion: este caso de uso describe el cobro de las fotos mediante tarjeta.
+
+Actores: servidor externo.
+
+Precondiciones: se debe haber ejecutado el CU subir fotos.
+
+Curso normal:
+    Accion del actor:
+        Paso 2: el servidor externo acepta la conexion.
+        Paso 4: el servidor externo valida los datos y fondos suficientes.
+        Paso 5: se realiza el cobro y envia resultado al sistema.
+
+    Accion del sistema:
+        Paso 1: el sistema solicita conexion con el servidor externo.
+        Paso 3: el sistema le envia los datos de la tarjeta.
+        Paso 6: el sistema recibe que los datos de la tarjeta son correctos.
+        Paso 7: el sistema recibe que los fondos son suficientes.
+        Paso 8: el sistema registra el pago y cierra la conexión con el servidor externo
+
+Curso alterno:
+    Paso 1: fallo la conexion.
+    Paso 5: falla en los datos de la tarjeta o fondos insuficientes y envia 
+    el resultado al sistema.
+    Paso 6: el sistema recibe que lo datos de la tarjeta son incorrectos y lo informa.  
+    Paso 7: el sistema recibe que los fondos son insuficientes y lo informa.
+
+Post condicion: se efectuo y registro el pago a traves de tarjeta.
+
+Las reglas de negocio ahora son los cursos alternos.
