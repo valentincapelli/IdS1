@@ -42,7 +42,7 @@ Descripcion: este caso de uso describe el evento en el que un cliente inicia ses
 
 Actores: cliente.
 
-Precondiciones: el cliente debe haberse registrado.
+Precondiciones:
 
 Curso normal:
     Accion del actor:
@@ -68,7 +68,7 @@ Descripcion: este caso de uso describe el evento en el que un cliente cierra ses
 
 Actores: cliente.
 
-Precondiciones: el cliente debe haber iniciado sesion.
+Precondiciones: el cliente debe tener una sesion iniciada.
 
 Curso normal:
     Accion del actor:
@@ -92,21 +92,31 @@ Descripcion: este caso de uso describe el evento en el que un cliente sube fotos
 
 Actores: cliente.
 
-Precondiciones: el cliente debe haber iniciado sesion.
+Precondiciones: el cliente debe tener una sesion iniciada.
 
 Curso normal:
     Accion del actor:
-        Paso 1: el cliente selecciona la opcion subir fotos.
-        Paso 3: el cliente sube sus fotos.
+        Paso 1: el cliente selecciona la opcion subir una foto.
+        Paso 3: el cliente sube su foto.
+        Paso 6: el cliente selecciona una opcion.
+        paso 10: el cliente ingresa los datos.
 
     Accion del sistema:
-        Paso 2: el sistema le solicita que ingrese las fotos de a una.
-        Paso 4: el sistema verifica que sean menos de 50 fotos las subidas.
-        Paso 4: el sistema registra las fotos.
+        Paso 2: el sistema le solicita que ingrese la foto.
+        Paso 4: el sistema verifica que sean menos de 50 fotos las subidas. 
+        Paso 5: el sistema le muestra las opciones "Subir otra foto" o "Terminar".
+        Paso 7: el cliente elegio terminar.
+        Paso 8: el sistema registra las fotos.
+        Paso 9: el sistema le pide que ingrese número de tarjeta, código de seguridad y 
+        nombre del titular.
+        Paso 10: el sistema llama al CU pagar con tarjeta.
+        Paso 11: el sistema imprime el codigo unico.
 
 Curso alterno:
-    Paso alternativo 4: el sistema notifica que se excedio el limite de fotos subidas.
-    Le pide que elimine la cantidad de fotos por las que se excedio.
+    Paso 4: el sistema notifica que alcanzo el limite de fotos subidas. Salta al 
+    paso 8.
+    Paso 7: el cliente eligio subir otra foto, vuelve al paso 2.
+    Paso 10: el CU pagar con tarjeta falla.
 
 Postcondicion: las fotos fueron subidas y registradas.
 
@@ -139,6 +149,32 @@ Curso alterno:
     Paso 6: el sistema recibe que lo datos de la tarjeta son incorrectos y lo informa.  
     Paso 7: el sistema recibe que los fondos son insuficientes y lo informa.
 
+
 Post condicion: se efectuo y registro el pago a traves de tarjeta.
 
-Las reglas de negocio ahora son los cursos alternos.
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: retiro de fotos.
+Descripcion: este caso de uso describe como es el retiro de las fotos.
+
+Actores: empleado.
+
+Precondiciones: se tuvo que haber ejecutado alguna vez el CU Pago con tarjeta. // Consultar
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el empleado presiona "Retiro de fotos".
+        Paso 3: el empleado ingresa el codigo otorgado por el cliente.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese el codigo. 
+        Paso 4: el sistema verifica el codigo.
+        Paso 5: el sistema registra el codigo y la fecha de retiro.
+        Paso 6: el sistema entrega las fotos.
+
+Curso alterno:
+    Paso 4: el sistema informa que el codigo ingresado no es correcto. Vuelve
+    al paso 2.
+
+Post condicion: las fotos fueron entregadas al cliente y se registro en
+el sistema la entrega.
