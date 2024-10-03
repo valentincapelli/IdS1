@@ -182,23 +182,3 @@ Curso alterno:
         Paso alternativo 9: fondos insuficientes. Se informa fondos insuficientes. Fin de CU.
 
 Postcondicion: se efectuo y registro el pago a traves de tarjeta.
-
----------------------------------------------------------------------------------------
-
-Nombre del caso de uso: retiro de fotos.
-Descripcion:
-
-Actores:
-
-Precondiciones:
-
-Curso normal:
-    Accion del actor:
-        
-
-
-    Accion del sistema:
-        
-Curso alterno:
-        
-Postcondicion:

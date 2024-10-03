@@ -1,0 +1,74 @@
+Historia de usuario 1:
+Id: realizar pago.
+Titulo: como cliente quiero realizar un pago electronico para mas comodidad.
+Reglas de negocio:
+    - Cuando el 2do vencimiento está vencido se debe informar que la factura no se 
+    puede cobrar por dicho motivo.
+    - Cuando el 1er vencimiento está vencido hay que aplicar el recargo al monto 
+    original.
+    - Si la factura no está vencida, se cobra el monto original.
+
+Criterios de aceptacion:
+    Escenario 1: pago exitoso.
+    Dado un cliente con codigo de pago electronico "12345".
+    Cuando el empleado o gerente de la sucursal ingresa el codigo de pago "12345" y el sistema se conecta con la central de cobro para recuperar los datos de la factura.
+    Entonces el sistema recupera los datos de la factura, verifica las fechas de vencimiento y se cobra el monto original.
+
+    Escenario 2: pago fallido por 2do vencimiento.
+    Dado un cliente con codigo de pago electronico "12345".
+    Cuando el empleado o gerente de la sucursal ingresa el codigo de pago "12345" y el sistema se conecta con la central de cobro para recuperar los datos de la factura.
+    Entonces el sistema recupera los datos de la factura, verifica las fechas de vencimiento, detecta que la segunda fecha de vencimiento esta vencida e informa que no se puede cobrar por dicho motivo.
+
+    Escenario 3: pago fallido por 1er vencimiento.
+    Dado un cliente con codigo de pago electronico "12345".
+    Cuando el empleado o gerente de la sucursal ingresa el codigo de pago "12345" y el sistema se conecta con la central de cobro para recuperar los datos de la factura.
+    Entonces el sistema recupera los datos de la factura, verifica las fechas de vencimiento, detecta que la primera fecha de vencimiento esta vencida y se cobra el monto original mas el recargo.
+
+    Escenario 3: conexion fallida.
+    Dado un cliente con codigo de pago electronico "12345".
+    Cuando el empleado o gerente de la sucursal ingresa el codigo de pago "12345" y el sistema intenta conectarse con la central de cobro para recuperar los datos de la factura.
+    Entonces el sistema no logra recuperar los datos dado que la conexion con la central de cobro fue fallida.
+
+Historia de usuario 2:
+Id: recuperar transacciones de los impuestos y servicios.
+Titulo: como gerente de la sucursal quiero recuperar transacciones de los impuestos y servicios cobrados en el dia para conectarme a la central.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: recuperacion exitosa.
+    Dado una clave maestra "xxxyyy" correcta. 
+    Cuando el gerente ingresa la clave "xxxyyy".
+    Entonces recupera las transacciones de los impuestos y servicios cobrados en el día.
+
+    Escenario 2: recuperacion fallida por clave maestro incorrecta.
+    Dado una clave maestra "xxxyyy" incorrecta. 
+    Cuando el gerente ingresa la clave "xxxyyy".
+    Entonces el sistema informa que la clave maestra es incorrecta.
+
+
+// INCOMPLETO
+Historia de usuario 3:
+Id: conexion con la central.
+Titulo: como sistema quiero conectarme a la central de cobro para registrar los cobros.
+Reglas de negocio:
+    - No deben enviarse dos veces las transacciones.
+
+Criterios de aceptacion:
+    Escenario 1:
+    s transacciones de los impuestos y servicios cobrados en el dia.
+
+Historia de usuario 4:
+Id: ver estadisticas.
+Titulo: como gerente quiero ver las estadisticas de los impuestos y servicios cobrados para llevar un control.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: muestra exitosa.
+    Dado una clave maestra "xxxyyy" y el rango de fechas "31/03/2004 a 2/10/2024".
+    Cuando se ingresa la clave maestra "xxxyyy" y el rango de fechas "31/03/2004 a 2/10/2024".
+    El sistema calcula las estadísticas y muestra los montos y la cantidad de cobros realizados, agrupando por empresa.
+
+    Escenario 1: muestra fallida.
+    Dado una clave maestra "xxxyyy" que no es correcta y el rango de fechas "31/03/2004 a 2/10/2024".
+    Cuando se ingresa la clave maestra "xxxyyy" y el rango de fechas "31/03/2004 a 2/10/2024".
+    El sistema informa que la clave maestra ingresada no es correcta.

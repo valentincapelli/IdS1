@@ -1,0 +1,26 @@
+Actores:
+    
+
+Casos de uso:
+    
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: 
+Descripcion: 
+
+Actores:
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        
+
+    Accion del sistema:
+        
+
+Curso alterno:
+    
+
+Postcondicion:
