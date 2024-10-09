@@ -16,12 +16,12 @@ Reglas de negocio:
 
 Criterios de aceptacion:
     Escenario 1: registro exitoso.
-    Dado un nombre de usuario "valentin", un correo electrónico "valentin@gmail.com" que no se repite en el sistema y una contraseña "1234".
+    Dado un correo electrónico "valentin@gmail.com" que no se repite en el sistema.
     Cuando la persona ingresa nombre de usuario "valentin", correo electrónico "valentin@gmail.com"y contraseña "1234".
     Entonces el sistema registra al nuevo usuario e informa que se registro exitosamente.
 
     Escenario 2: registro fallido.
-    Dado un nombre de usuario "valentin", un correo electrónico "valentin@gmail.com" que se repite en el sistema y una contraseña "1234".
+    Dado un correo electrónico "valentin@gmail.com" que se repite en el sistema.
     Cuando la persona ingresa nombre de usuario "valentin", correo electrónico "valentin@gmail.com"y contraseña "1234".
     Entonces el sistema notifica que ese correo electronico ya se encuentra registrado, y que ingrese uno distinto.
 
@@ -32,13 +32,13 @@ Reglas de negocio:
 
 Criterios de aceptacion:
     Escenario 1: inicio de sesion exitoso.
-    Dado un nombre de usuario "valentin" y una contraseña "1234".
-    Cuando la persona ingresa nombre de usuario "valentin" y contraseña "1234".
+    Dado un mail "valentin@gmail.com" y una contraseña "1234" que ambos coinciden con un usuario de mi sistema.
+    Cuando la persona ingresa el mail "valentin@gmail.com" y contraseña "1234".
     Entonces el sistema activa las funcionalidades para un usuario 
 
     Escenario 2: inicio de sesion fallido.
-    Dado un nombre usuario "valentin" y contraseña "1234" que no pertenecen a alguien registrado en el sistema.
-    Cuando la persona ingresa su nombre de usuario "valentin", contraseña "1234" y presiona enter.
+    Dado un mail "valentin@gmail.com" y contraseña "34534654" que no pertenecen a alguien registrado en el sistema.
+    Cuando la persona ingresa su mail "valentin@gmail.com", contraseña "1234" y presiona enter.
     Entonces el sistema informará que el usuario o la contraseña son incorrectos.
 
 Historia de usuario 3:
@@ -64,19 +64,24 @@ Reglas de negocio:
     - Los diferentes viajes que un usuario publique no pueden superponerse.
     - Un usuario que adeuda calificaciones tampoco podrá publicar un viaje.
 
+En los dados hay que hacer referencia a las reglas de negocio a cosas de disponibibilidad o de repeticion implicitas.
+mirar explicacion de practica en el exito las cosas que se tienen que cumplir, no esta mal escribirlas en negativa
+en las fallas poner datos distintos al exito
+volver a ver explicacion de practica
+
 Criterios de aceptación:
 Escenario 1: dado de alta de viaje exitoso.
-    Dado una fecha "7/10/2024", hora "11:30hs" y automovil "VW Gol".
+    Dado una fecha "7/10/2024", hora "11:30hs" del usuario "juan" que no se superpone con otro de sus viajes y que no debe calificaciones.
     Cuando la persona ingresa fecha "7/10/2024", hora "11:30hs" y automovil "VW Gol".
     Entonces el sistema publica el viaje en el sistema y lo informa en pantalla.
 
 Escenario 2:dado de alta de viaje fallido por superposicion.
-    Dado una fecha "7/10/2024", hora "11:30hs" que se superpone con otro viaje y automovil "VW Gol".
-    Cuando la persona ingresa fecha "7/10/2024", hora "11:30hs" y automovil "VW Gol".
+    Dado una fecha "8/10/2024", hora "11:30hs" del usuario "juan" que se superpone con otro viaje suyo.
+    Cuando la persona ingresa fecha "8/10/2024", hora "11:30hs" y automovil "VW Gol".
     Entonces el sistema informa que la hora de este viaje se superpone con otro. Le pide que cambie la hora.
 
 Escenario 3:dado de alta de viaje fallido por deuda de calificaciones.
-    Dado una fecha "7/10/2024", hora "11:30hs", automovil "VW Gol" y un usuario que adeuda calificaciones.
+    Dado una fecha "7/10/2024", hora "11:30hs", del usuario "juan" que no se superpone con otro viaje suyo y que adeuda calificaciones.
     Cuando la persona ingresa fecha "7/10/2024", hora "11:30hs" y automovil "VW Gol".
     Entonces el sistema informa que el usuario adeuda calificaciones y hasta que no se adeuden estas no podra publicar viajes.
 
@@ -84,47 +89,66 @@ Historia de usuario 5:
 ID: postularse a un viaje.
 Título: como usuario quiero postularme a un viaje para ahorrarme dinero.
 Reglas de negocio:
-    - Tener una sesion iniciada.
 
 Criterios de aceptación:
 Escenario 1: postulado exitoso.
-    Dado un usuario con sesion iniciada.
+    Dado un usuario "juan" y un viaje pendiente de realizarse y no esta previamente postulado en ese viaje.
     Cuando el usuario presiona "Postularse".
     Entonces el sistema lo subira al sistema, lo informara en pantalla y quedara pendiente de aceptacion.
+
+    Escenario 2: falla por anotarse dos veces
+    Dado un usuario "juan" y un viaje pendiente de realizarse y ya esta previamente postulado en ese viaje.
+    Cuando el usuario presiona "Postularse".
+    Entonces el sistema informara un error diciendo que ya se postulo para este viaje.
+
+    Escenario 3: falla por no haber viajes disponibles
+    Dado un usuario "juan" y no haber viajes para postularse.
+    Cuando el usuario presiona ver viajes.
+    Entonces el sistema informara un error diciendo que no hay viajes para postularse.
+
 
 Historia de usuario 6:
 ID: aceptar candidato.
 Título: como usuario quiero aceptar un cadidato para llevarlo en mi viaje.
 Reglas de negocio:
-    - Tener una sesion iniciada.
 
 Criterios de aceptación:
 Escenario 1: candidato aceptado.
-    Dado un usuario con sesion iniciada y la lista de candidatos disponibles.
+    Dado un usuario "juan" y la lista tiene candidatos disponibles para sus viajes.
     Cuando el usuario selecciona un candidato y presiona "Aceptar candidato".
     Entonces el sistema registrara ese candidato para ese chofer, lo informara en pantalla y avisara al candidato que fue aceptado.
 
 Escenario 2: candidato rechazado.
-    Dado un usuario con sesion iniciada y la lista de candidatos disponibles.
+    Dado un usuario "juan" y la lista tiene candidatos disponibles para sus viajes.
     Cuando el usuario selecciona un candidato y presiona "Rechazar candidato".
     Entonces el sistema informara en pantalla que el candidato fue rechazado y avisara al candidato de esto.
+
+Escenario 3: fallido por no haber candidatos.
+    Dado un usuario "juan" y la lista de candidatos disponibles esta vacia.
+    Cuando el usuario selecciona ver listado.
+    Entonces el sistema informara un error diciendo que la lista de candidatos esta vacia.
 
 Historia de usuario 7:
 ID: calificar piloto.
 Título: como usuario quiero calificar el piloto para que los demas usuarios tengan una referencia.
 Reglas de negocio:
-    - Tener una sesion iniciada.
 
 Criterios de aceptación:
 Escenario 1: calificacion positiva.
-    Dado un usuario que termino un viaje con un piloto.
+    Dado un usuario que termino un viaje con un piloto y que no realizo la calificacion todavia.
     Cuando el usuario ingresa su opinion como "Positiva".
     Entonces el sistema registra esta opinion y le suma un punto de reputacion al piloto.
 
 Escenario 2: calificacion negativa.
-    Dado un usuario que termino un viaje con un piloto.
+    Dado un usuario que termino un viaje con un piloto y que no realizo la calificacion todavia.
     Cuando el usuario ingresa su opinion como "Negativa".
     Entonces el sistema registra esta opinion y le resta un punto de reputacion al piloto.
+
+Escenario 3: fallido por calificar dos veces.
+    Dado un usuario que termino un viaje con un piloto y que ya realizo la calificacion.
+    Cuando el usuario presiona "Calificar".
+    Entonces el sistema informara un error diciendo que no se puede calificar dos veces.
+
 
 Historia de usuario 8:
 ID: calificar copiloto.
@@ -134,11 +158,16 @@ Reglas de negocio:
 
 Criterios de aceptación:
 Escenario 1: calificacion positiva.
-    Dado un usuario que termino un viaje con un copiloto.
+    Dado un usuario que termino un viaje con un copiloto y que no realizo la calificacion todavia.
     Cuando el usuario ingresa su opinion como "Positiva".
     Entonces el sistema registra esta opinion y le suma un punto de reputacion al copiloto.
 
 Escenario 2: calificacion negativa.
-    Dado un usuario que termino un viaje con un copiloto.
+    Dado un usuario que termino un viaje con un copiloto y que no realizo la calificacion todavia.
     Cuando el usuario ingresa su opinion como "Negativa".
     Entonces el sistema registra esta opinion y le resta un punto de reputacion al copiloto.
+
+Escenario 3: fallido por calificar dos veces.
+    Dado un usuario que termino un viaje con un copiloto y que ya realizo la calificacion.
+    Cuando el usuario presiona "Calificar".
+    Entonces el sistema informara un error diciendo que no se puede calificar dos veces.

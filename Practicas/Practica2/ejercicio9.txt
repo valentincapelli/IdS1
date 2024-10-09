@@ -61,9 +61,9 @@ Criterios de aceptacion:
     Escenario 2: conexion fallida por mala conexion.
     Dado que hay mala conexion con la central y el token "111".
     Cuando se intenta establecer conexion con la central.
-    Entonces se informa el error diciendo que no se pudo establecer conexion con la central.\
+    Entonces se informa el error diciendo que no se pudo establecer conexion con la central.
 
-    Escenario 2: conexion fallida por token invalido.
+    Escenario 3: conexion fallida por token invalido.
     Dado que hay buena conexion con la central y el token "111" incorrecto.
     Cuando se establece la conexion con la central y se envia el token "111".
     Entonces se informa el error diciendo que el token recibido es incorrecto.
