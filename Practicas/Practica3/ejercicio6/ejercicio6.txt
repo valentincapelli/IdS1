@@ -1,17 +1,163 @@
 Actores:
-    
+    Empleado
+    Usuario
+    Sistema del banco
+    Vendedor
+    Administrador
 
 Casos de uso:
-    
+    Reserva de entradas
+    Comprar entradas vía web
+    Pagar con tarjeta
+    Comprar entradas personalmente
+    Retirar entradas reservadas
+    Retirar entradas con codigo de compra
+    Administrar programacion de las salas
 
 ---------------------------------------------------------------------------------------
 
-Nombre del caso de uso: 
-Descripcion: 
+Nombre del caso de uso: reserva de entradas.
+Descripcion: este caso de uso describe el evento en el que un espectador reserva sus
+entradas.
 
-Actores:
+Actores: empleado, usuario.
 
 Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el empleado presiona "Reserva de entradas".
+        Paso 3: el empleado ingresa los datos solicitados.
+        Paso 5: el usuario selecciona el nombre de la obra.
+
+    Accion del sistema:
+        Paso 2: el sistema solicita que el empleado ingrese los datos de la obra (fecha,
+        hora, y nombre) junto el nombre, DNI del espectador y cantidad de entradas (1/2). 
+        Paso 4: Para seleccionar el nombre de la obra, el sistema muestra una grilla 
+        de funciones disponibles para que el usuario seleccione una.
+        // Paso 6: el sistema verifica que hayan entradas disponibles.
+        Paso 7: el sistema reserva las entradas y lo informa en pantalla.
+
+Curso alterno:
+        // Paso 6: el sistema informa que no quedan mas entradas disponibles para esa
+        obra. Vuelve al paso 4.
+
+Postcondicion: se realizo la reserva de entradas para un usuario.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: comprar entradas via web.
+Descripcion: este caso de uso describe el evento en el que un usuario compra sus
+entradas via web.
+
+Actores: usuario.
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el usuario presiona "Comprar entradas".
+        Paso 3: el usuario selecciona una de las grillas disponibles.
+        Paso 5: el usuario ingresa los datos solicitados.
+        Paso 7: el usuario presiona "Pagar".
+
+    Accion del sistema:
+        Paso 2: el sistema muestra la grilla de funciones disponibles.
+        Paso 4: el sistema le solicita que ingrese ingresa su DNI y la cantidad
+        de lugares solicitados.
+        Paso 6: el sistema verifica que hayan entradas suficientes.
+        Paso 8: el sistema ejecuta el caso de uso "Pagar con tarjeta"
+        Paso 9: el sistema emite el codigo de compra.
+        
+Curso alterno:
+        Paso 6: el sistema informa que no hay entradas suficientes para esa obra. Vuelve
+        al paso 2.
+        Paso 8: el pago no se realiza. Se notifica al usuario. Fin del CU.
+
+Postcondicion: un usuario realizo la compra de sus entradas via web.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: pagar con tarjeta.
+Descripcion: este caso de uso describe el evento de pagar con tarjeta de credito.
+
+Actores: usuario, servidor de banco.
+
+Precondiciones: se debe haber ejecutado previamente alguno de los siguientes casos de uso:
+    - Comprar entradas via web.
+    - Retirar entradas reservadas.
+    - Comprar entradas personalmente.
+
+Curso normal:
+    Accion del actor:
+       Paso 2: el usuario ingresa los datos solicitados.
+       Paso 4: el sistema del banco acepta la conexion y solicita el número de tarjeta, 
+       vencimiento, y código de seguridad.
+       Paso 6: el sistema del banco valida los datos y fondos suficientes.
+       Paso 7: el sistema del banco retorna el resultado.
+
+    Accion del sistema:
+        Paso 1: el sistema solicita que ingrese número de tarjeta, vencimiento, y código de 
+        seguridad.
+        Paso 3: el sistema solicita conexion con el sistema del banco.
+        Paso 5: el sistema envia los datos de la tarjeta al sistema del banco.
+        Paso 8: el sistema recibe que los datos de la tarjeta son correctos.
+        Paso 9: el sistema recibe que los fondos son suficientes.
+        Paso 10: el sistema registra el pago y cierra la conexion con el servidor
+        externo.
+        
+Curso alterno:
+        Paso alternativo 3: falla la conexion con el servidor. Se informa el error.
+        Fin del CU.
+        Paso alternativo 8: la validacion de los datos es incorrecta. Se informa error en
+        los datos de la tarjeta. Fin del CU.
+        Paso alternativo 9: fondos insuficientes. Se informa esto. Fin del CU.
+
+Postcondicion: se efectuo y registro el pago a traves de tarjeta de credito.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: comprar entradas personalmente.
+Descripcion: este caso de uso describe el evento donde se compran entradas de forma
+presencial.
+
+Actores: vendedor.
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el vendedor presiona "Realizar compra de entradas."
+        Paso 3: el vendedor selecciona la funcion elegida por el cliente.
+        Paso 5: el vendedor ingresa el DNI del cliente y la cantidad de lugares
+        solicitados.
+        Paso 7: el vendedor presiona "Pagar".
+
+    Accion del sistema:
+        Paso 2: el sistema muestra la grilla de funciones disponibles.
+        Paso 4: el sistema le solicita que ingrese ingresa su DNI y la cantidad
+        de lugares solicitados.
+        Paso 6: el sistema verifica que hayan entradas suficientes.
+        Paso 8: el sistema ejecuta el caso de uso "Pagar con tarjeta"
+        Paso 9: el sistema imprime las entradas.
+        
+        
+Curso alterno:
+        Paso 6: el sistema informa que no hay entradas suficientes para esa obra. Vuelve
+        al paso 2.
+        Paso 8: el pago no se realiza. Se notifica al vendedor. Fin del CU.
+
+Postcondicion: el vendedor le entrega al usuario sus entradas compradas.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: retirar entradas reservadas.
+Descripcion: este caso de uso describe el evento que se retiran entradas reservadas por
+un espectador.
+
+Actores: empleado.
+
+Precondiciones: se tuvo que haber ejecutado alguna vez el CU reserva de entradas.
 
 Curso normal:
     Accion del actor:
@@ -19,8 +165,9 @@ Curso normal:
 
     Accion del sistema:
         
-
+        
+        
 Curso alterno:
-    
+        
 
 Postcondicion:

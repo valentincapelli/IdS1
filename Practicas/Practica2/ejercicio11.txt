@@ -1,0 +1,132 @@
+Historias de usuario:
+    Registrar docente
+    Incribirse al concurso
+    Imprimir listado
+    Inicio de sesion
+    Cierre de sesion
+
+
+### Historia de usuario 1
+
+ID: Registrar docente
+
+Titulo: Como docente quiero registrarme en el sistema para inscribirme en un concurso
+
+Reglas de negocio:
+
+- El mail debe ser unico
+- DNI entre 12 millones a 55 millones
+
+Criterios de aceptacion
+
+Escenario 1: Registro exitoso
+
+Dado el docente Raul con Dni 50.777.777, direccion de mail raulperez@gmail.com que aun no se ha registrado
+Cuando ingresa DNI 50.777.777, nombre Raul, apellido Perez y direccion de mail raulperez@gmail.com
+Entonces el sistema registra un nuevo registro en el sistema y por mail le envia una contraseña generada automaticamente
+
+Escenario 2: Registro fallido por Dni que no cumple el rango
+
+Dado el docente Alberto con Dni 66.666.666, direccion de mail alberto@gmail.com que aun no se ha registrado
+Cuando ingresa DNI 66.666.666, nombre Alberto, apellido Fernandez y direccion de mail alberto@gmail.com
+Entonces el sistema notifica que el Dni no cumple con el rango permitido
+
+Escenario 3: Registro fallido por mail existente
+
+Dado el docente Pedro con Dni 45.455.455,  direccion de mail pedro77@gmail.com que ya se registro
+Cuando ingresa DNI 45.455.455, nombre Pedro, apellido Pepe y direccion de mail pedro77@gmail.com
+Entonces el sistema notifica que el mail ya existe en el sistema
+
+### Historias de usuario 2
+
+ID: Iniciar sesion
+
+Titulo: Como docente quiero iniciar sesion en el sistema para inscribirme a un concurso
+
+Reglas de negocio:
+
+Criterios de aceptacion
+
+Escenario 1: Inicio de sesion exitoso
+
+Dado un docente con email “fabiotorrejon@gmail.com” y contraseña “ColePalmer10” que ya esta registrado.
+
+Cuando ingresa con su email “fabiotorrejon@gmail.com” y contraseña “ColePalmer10” al presionar enter.
+
+Entonces el sistema lo redirige a la pagina principal del sistema.
+
+Escenario 2: Error en el inicio de sesion por datos incorrectos
+
+Dado un docente con email “capellivalentin@gmail.com”  y contraseña “Messi10” que no esta registrado en el sistema 
+
+Cuando ingresa con su email “capellivalentin@gmail.com” y contraseña “Messi10” al presionar enter.
+
+Entonces el sistema informa un mensaje de error, correo o contraseña incorrectos
+
+### Historias de usuario 3
+
+ID: Cerrar sesion
+
+Titulo: Como docente quiero cerrar sesion en el sistema para que no persistan mis datos en la maquina
+
+Reglas de negocio:
+
+Criterios de aceptacion
+
+Escenario 1: Cierre exitoso
+
+Dado un correo “cape@gmail.com” que tiene una sesion iniciada
+Cuando el usuario presiona cerrar sesion y confirmar
+Entonces el sistema lo redirige a la pagina de login y signin. 
+
+Escenario 2: Cierre fallido
+
+Dado un correo “cape@gmail.com” que tiene una sesion iniciada
+Cuando el usuario presiona cerrar sesion y no confirmar
+Entonces el sistema cancela el cierre de sesion
+
+### Historias de usuario 4
+
+ID: Inscribir a concurso
+
+Titulo: Como docente quiero inscribirme a un concurso para aprender
+
+Reglas de negocio:
+
+- No podra inscribirse a mas de 3 concursos
+
+Criterios de aceptacion
+
+Escenario 1: Inscripcion exitosa
+
+Dado un docente que se inscribio a 1 (un) concurso previamente
+Cuando seleccione la materia a la que desea inscribirse y acepta la inscripcion
+Entonces el sistema registra la inscripcion e imprime un comprobante
+
+Escenario 2: Inscripcion fallida por mas de 3 concursos inscriptos
+
+Dado un docente que se inscribio a 3 (tres) concursos previamente
+Cuando seleccione la materia a la que desea inscribirse y acepta la inscripcion
+Entonces el sistema notifica que ya se inscribio al maximo de concursos permitidos
+
+### Historias de usuario 5
+
+ID: Imprimir listado
+
+Titulo: Como jefe del area de concursos quiero imprimir un listado con los inscriptos para poder enviar dicho listado al secretario administrativo
+
+Reglas de negocio:
+
+Criterios de aceptacion
+
+Escenario 1: Impresion de listado exitoso
+
+Dado un jefe de area de concursos y la materia “MATE 2” con 777 inscriptos
+Cuando selecciona la materia “MATE 2” y presiona imprimir listado
+Entonces el sistema imprime un listado con los inscriptos a una materia determinada
+
+Escenario 2: Impresion nula
+
+Dado un jefe de area de concursos y la materia “AYED” con 0 inscriptos
+Cuando selecciona la materia “AYED” y presiona imprimir listado
+Entonces el sistema notifica que no hay inscriptos a dicha materia

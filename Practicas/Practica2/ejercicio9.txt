@@ -46,18 +46,56 @@ Criterios de aceptacion:
     Entonces el sistema informa que la clave maestra es incorrecta.
 
 
-// INCOMPLETO
+// Consultar
 Historia de usuario 3:
 Id: conexion con la central.
 Titulo: como sistema quiero conectarme a la central de cobro para registrar los cobros.
 Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: conexion exitosa.
+    Dado que hay buena conexion con la central y el token "111".
+    Cuando se establece la conexion con la central y se envia el token "111".
+    Entonces la central valida el token.
+
+    Escenario 2: conexion fallida por mala conexion.
+    Dado que hay mala conexion con la central y el token "111".
+    Cuando se intenta establecer conexion con la central.
+    Entonces se informa el error diciendo que no se pudo establecer conexion con la central.\
+
+    Escenario 2: conexion fallida por token invalido.
+    Dado que hay buena conexion con la central y el token "111" incorrecto.
+    Cuando se establece la conexion con la central y se envia el token "111".
+    Entonces se informa el error diciendo que el token recibido es incorrecto.
+
+Historia de usuario 4:
+Id: registrar pagos.
+Titulo: como gerente quiero registrar los pagos de los clientes para llevar un control.
+Reglas de negocio:
     - No deben enviarse dos veces las transacciones.
 
 Criterios de aceptacion:
-    Escenario 1:
-    s transacciones de los impuestos y servicios cobrados en el dia.
+    Escenario 1: registro exitoso.
+    Dado la clave maestra correcta "1234", el registro aun no se realizo y la conexion con la central de cobro es buena.
+    Cuando el gerente ingresa la clave maestra "1234".
+    Entonces el sistema recupera las transacciones de los impuestos y servicios cobrados en el día y se las envía a la central de cobros. 
 
-Historia de usuario 4:
+    Escenario 2: registro fallido por clave maestra incorrecta.
+    Dado la clave maestra incorrecta "1234", el registro aun no se realizo y la conexion con la central de cobro es buena.
+    Cuando el gerente ingresa la clave maestra "1234".
+    Entonces el sistema informa que no se pudo registrar los pagos por que la clave maestra es incorrecta.
+
+    Escenario 3: registro fallido por enviarse dos veces las transacciones.
+    Dado la clave maestra correcta "1234", el registro que ya se realizo y la conexion con la central de cobro es buena.
+    Cuando el gerente ingresa la clave maestra "1234".
+    Entonces el sistema informa que ya fueron enviadas una vez las transacciones y que no se pueden volver a enviar.
+
+    Escenario 4: registro fallido por mala conexion con la central de cobro.
+    Dado la clave maestra correcta "1234", el registro aun no se realizo y la conexion con la central de cobro es mala.
+    Cuando el gerente ingresa la clave maestra "1234".
+    Entonces el sistema informa que no se pudo conectar con la central de cobro.
+
+Historia de usuario 5:
 Id: ver estadisticas.
 Titulo: como gerente quiero ver las estadisticas de los impuestos y servicios cobrados para llevar un control.
 Reglas de negocio:

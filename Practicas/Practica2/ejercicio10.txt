@@ -9,7 +9,7 @@ Historias de usuario:
     Calificar viaje copiloto
 
 Historia de usuario 1:
-Id: registrarse.
+Id: registrar persona.
 Titulo: como persona quiero registrarme para publicar o postular viajes.
 Reglas de negocio:
     - No puede haber dos correos electrónicos iguales en el sistema.
