@@ -1,0 +1,69 @@
+Historias de usuario:
+    Pedir credito
+    Consultar estado del tramite
+    Pedir listado
+
+Historia de usuario 1:
+ID: pedir credito.
+Titulo: como cliente quiero pedir un credito para realizar una inversion.
+Reglas de negocio:
+    - El credito solicitado no puede superar los $400.000.
+
+Criterios de aceptacion:
+    - Escenario 1: pedido exitoso.
+    Dado el dni "1234" que corresponde a un cliente del banco y un monto de $200.000.
+    Cuando el cliente ingresa dni "1234", nombre "valentin", apellido "capelli", mail "valentin@gmail.com", tipo de credito "personal" y monto "$200.000". 
+    Entonces el sistema almacena el trámite para que sea analizado por el área económica e imprime un número de comprobante para el cliente.
+
+    - Escenario 2: pedido fallido por no ser cliente.
+    Dado el dni "123456" que NO corresponde a un cliente del banco y un monto de $200.000.
+    Cuando el cliente ingresa dni "123456", nombre "valentin", apellido "capelli", mail "valentin@gmail.com", tipo de credito "personal" y monto "$200.000". 
+    Entonces el sistema informa que el dni no corresponde a un cliente del banco y  envia un correo electrónico al email ingresado con un instructivo para hacerse cliente del banco.
+
+    - Escenario 3: pedido fallido por superar el monto limite.
+    Dado el dni "1234" que corresponde a un cliente del banco y un monto de $500.000.
+    Cuando el cliente ingresa dni "1234", nombre "valentin", apellido "capelli", mail "valentin@gmail.com", tipo de credito "personal" y monto "$200.000". 
+    Entonces el sistema informa que el monto solicitado excede el limite permitido.
+
+Historia de usuario 2:
+Id: consultar estado del tramite.
+Titulo: como cliente quiero consultar el estado de un tramite solo por curiosidad.
+Reglas de negocio:
+
+    Escenario 1: consulta exitosa.
+    Dado un cliente con numero de comprobante "123" que es valido y que lleva ingresados 0 codigos inexistentes.
+    Cando el cliente ingresa el numero de comprobante "123".
+    Entonces el sistema retorna un informe con el estado del mismo.
+
+    Escenario 2: consulta fallida por numero de comprobante invalido.
+    Dado un cliente con numero de comprobante "123456" que NO es valido y que lleva ingresados 0 codigos inexistentes.
+    Cando el cliente ingresa el numero de comprobante "123456".
+    Entonces el sistema informara en pantalla "trámite inexistente".
+
+    Escenario 3: consulta fallida y supera los 3 intentos.
+    Dado un cliente con numero de comprobante "1234" que NO es valido y que lleva ingresados 2 codigos inexistentes.
+    Cando el cliente ingresa el numero de comprobante "1234".
+    Entonces el sistema bloquea la ip (dirección de red de la máquina que efectúa la consulta) del cliente por 24 horas informando “Usted ha excedido el número de consultas inválidas”.
+
+Historia de usuario 3:
+Id: pedir listado.
+TItulo: como gerente del banco quiero pedir un listado de creditos entre fechas para
+analizar los datos.
+Reglas de negocio:
+
+Criterios de negocio:
+    Escenario 1: pedido de listado exitoso.
+    Dado un gerente de banco que ingresa las fechas validas "31/03/2024" y "9/10/2024", y entre esas fechas hay creditos aprobados.
+    Cuando ingresa "31/03/2024" y "9/10/2024".
+    Entonces el sistema mostrará un listado con los créditos aprobados entre esas fechas.
+
+    Escenario 2: pedido de listado fallido por falta de creditos aprobados.
+    Dado un gerente de banco que ingresa las fechas validas "31/01/2024" y "9/2/2024", y entre esas fechas NO hay creditos aprobados.
+    Cuando ingresa "31/01/2024" y "9/2/2024".
+    Entonces el sistema  mostrará el mensaje "No hay créditos aprobados en las fechas ingresadas".
+
+    Escenario 3: pedido de listado fallido por fechas invalidas.
+    Dado un gerente de banco que ingresa las fechas invalidas "31/03/2024" y "9/1/2024".
+    Cuando ingresa "31/03/2024" y "9/1/2024".
+    Entonces el sistema mostrará un mensaje diciendo "Las fechas ingresadas no son validas".
+

@@ -20,7 +20,7 @@ Nombre del caso de uso: reserva de entradas.
 Descripcion: este caso de uso describe el evento en el que un espectador reserva sus
 entradas.
 
-Actores: empleado, usuario.
+Actores: empleado.
 
 Precondiciones:
 
@@ -28,14 +28,14 @@ Curso normal:
     Accion del actor:
         Paso 1: el empleado presiona "Reserva de entradas".
         Paso 3: el empleado ingresa los datos solicitados.
-        Paso 5: el usuario selecciona el nombre de la obra.
+        Paso 5: el empleado selecciona el nombre de la obra.
 
     Accion del sistema:
         Paso 2: el sistema solicita que el empleado ingrese los datos de la obra (fecha,
         hora, y nombre) junto el nombre, DNI del espectador y cantidad de entradas (1/2). 
         Paso 4: Para seleccionar el nombre de la obra, el sistema muestra una grilla 
         de funciones disponibles para que el usuario seleccione una.
-        // Paso 6: el sistema verifica que hayan entradas disponibles.
+        Paso 6: el sistema verifica que hayan entradas disponibles.
         Paso 7: el sistema reserva las entradas y lo informa en pantalla.
 
 Curso alterno:
@@ -81,7 +81,7 @@ Postcondicion: un usuario realizo la compra de sus entradas via web.
 Nombre del caso de uso: pagar con tarjeta.
 Descripcion: este caso de uso describe el evento de pagar con tarjeta de credito.
 
-Actores: usuario, servidor de banco.
+Actores: usuario, empleado, vendedor y servidor de banco.
 
 Precondiciones: se debe haber ejecutado previamente alguno de los siguientes casos de uso:
     - Comprar entradas via web.
@@ -90,7 +90,7 @@ Precondiciones: se debe haber ejecutado previamente alguno de los siguientes cas
 
 Curso normal:
     Accion del actor:
-       Paso 2: el usuario ingresa los datos solicitados.
+       Paso 2: el usuario o empleado o vendedor ingresa los datos solicitados.
        Paso 4: el sistema del banco acepta la conexion y solicita el número de tarjeta, 
        vencimiento, y código de seguridad.
        Paso 6: el sistema del banco valida los datos y fondos suficientes.
@@ -161,13 +161,76 @@ Precondiciones: se tuvo que haber ejecutado alguna vez el CU reserva de entradas
 
 Curso normal:
     Accion del actor:
-        
+        Paso 1: el empleado presiona "Retiro de entradas."
+        Paso 3: el empleado ingresa los datos solicitados.
+        Paso 7: el empleado presiona "Pagar".
 
     Accion del sistema:
+        Paso 2: el sistema solicita el nombre y dni del espectador.
+        Paso 4: el sistema valida que la persona posea reservas.
+        Paso 5: el sistema valida que la reserva no esten caducadas.
+        Paso 6: el sistema le muestra la opcion de "Pagar".
+        Paso 8: el sistema ejecuta el caso de uso "Pagar con tarjeta"
+        Paso 9: se imprimen las entradas.
         
+Curso alterno:
+        Paso 4: se informa un error diciendo que la persona no posee reservas. Fin 
+        del CU.
+        Paso 5: se informa un error diciendo que la reserva de la persona esta caducada. 
+        Fin del CU.
+        Paso 8: se informa un error diciendo que no se pudo completar el pago. Fin del
+        CU.
+
+Postcondicion: se retiraron las entradas reservadas por un cliente.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: retirar entradas con codigo de compra.
+Descripcion: este caso de uso describe el evento del retirar las entradas con el codigo
+de compra.
+
+Actores: vendedor.
+
+Precondiciones: se tuvo que haber ejecutado en algun momento el CU comprar entradas via
+web.
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el vendedor presiona "Retirar entradas con codigo de compra".    
+        Paso 3: el vendedor ingresa el codigo de compra del cliente.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese el codigo de compra.
+        Paso 4: el sistema verifica el codigo de compra.
+        Paso 5: el sistema imprime las entradas.
+        
+        
+Curso alterno:
+        Paso 4: codigo de compra incorrecto. Se informa que el codigo ingresado no
+        pertenece a ningun codigo de compra registrado.
+
+Postcondicion: se imprimen las entradas compradas online del cliente.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: administrar programacion de las salas.
+Descripcion: este caso de uso describe el evento de el administrador subiendo la
+programacion de las salas.
+
+Actores: administrador.
+
+Precondiciones: 
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el administrador presiona "Administrar programacion semanal".
+        Paso 3: el administrador ingresa la administracion semanal.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese la programacion semanal.
+        Paso 3: el sistema guarda la programacion semanal y lo notifica.
         
         
 Curso alterno:
         
-
-Postcondicion:
+Postcondicion: el administrador sube la programacion semanal al sistema.
