@@ -1,0 +1,146 @@
+Actores:
+    Cliente no registrado
+    Cliente registrado
+    Aplicacion del banco
+
+Casos de uso:
+    Registrar cliente
+    Iniciar sesion
+    Cerrar sesion
+    Solicitar prestamo via web
+    Comprobar Veraz
+    Adelantar cuotas
+    Cancelar prestamo
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: solicitar prestamo.
+Descripcion: este caso de uso describe el evento que un cliente solicita un prestamo
+via web.
+
+Actores: cliente.
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el cliente presiona "Solicitar prestamo".
+        Paso 3: el cliente ingresa los datos solicitados.
+
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese el motivo, el monto y que
+        seleccione la cuenta de la cual se descontará automáticamente la cuota.
+        Paso 4: el sistema verifica que el monto ingresado sea valido.
+        Paso 5: el sistema ejecuta el CU comprobar veraz.
+        Paso 6: el sistema registra el préstamo correspondiente, genera un identificador del préstamo,
+        un código de verificación y un comprobante con los datos del préstamo.
+
+Curso alterno:
+        Paso 2: el cliente ya tiene solicitados 3 prestamos. Se notifica.
+        Fin del CU.
+        Paso 4: el cliente ingreso un monto invalido. Se notifica.
+        Vuelve al paso 2.
+        Paso 5: la comprobacion veraz fallo. Se notifica. Fin del CU.
+
+Postcondicion: el cliente solicito un prestamo via web.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: comprobar veraz.
+Descripcion: este caso de uso describe la comprobacion de la aplicacion del banco
+en veraz.
+
+Actores: aplicacion del banco.
+
+Precondiciones: se tuvo que haber ejecutado el CU solicitar prestamo.
+
+Curso normal:
+    Accion del actor:
+        Paso 3: la aplicacion del banco valida la identidad e informa de esto
+        al sistema.
+        Paso 4: la aplicación le envía el nombre y apellido de la persona y 
+        su número de CUIL/CUIT.
+
+    Accion del sistema:
+        Paso 1: el sistema establece conexion con la aplicacion del banco.
+        Paso 2: el sistema envía un código de seguridad para validar la 
+        identidad de la aplicación del banco.
+        Paso 5: el sistema recibe los datos de la persona y determina si existe 
+        o no como deudor. 
+
+Curso alterno:
+    Paso 1: la conexion con el banco no se pudo establecer. Se notifica de esto.
+    Fin del CU.
+        
+
+Postcondicion: el sistema realizo la comprobacion veraz.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: adelantar cuotas.
+Descripcion: este caso de uso describe el evento que el cliente adelanta cuotas
+del prestamo.
+
+Actores: cliente.
+
+Precondiciones: 
+    - Debe haber pasado 6 meses de la otorgacion del prestamo.
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el cliente presiona "Adelantar cuotas".
+        Paso 3: el cliente selecciona el prestamo.
+        Paso 5: el cliente ingrese la cantidad de cuotas a abonar.
+        Paso 7: el cliente selecciona una cuenta.
+
+    Accion del sistema:
+        Paso 2:  el sistema muestra un listado de préstamos vigentes donde 
+        se debe seleccionar el que se desea pagar.
+        Paso 4: el sistema solicita ingresar la cantidad de cuotas a abonar.
+        Paso 6: el sistema muestra un listado de cuentas del cliente, donde 
+        deberá seleccionar una de ellas para realizar el pago.
+        Paso 7: si hay saldo suficiente.
+            Paso 7.1: se descuenta el monto de la cuenta del cliente.
+
+Curso alterno:
+    Paso 7.1: la cuenta no posee saldo. Se le notifica al cliente.
+        
+
+Postcondicion: el cliente realizo un adelanto de cuotas.
+
+---------------------------------------------------------------------------------------
+
+Nombre del caso de uso: cancelar prestamo.
+Descripcion: este caso de uso describe el evento que un cliente cancela 
+un prestamo.
+
+Actores: cliente.
+
+Precondiciones: deben haber pasado 9 meses desde que solicito el prestamo.
+    
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el cliente presiona "Acreditar identidad".
+        Paso 3: el cliente ingresa su dni.
+        Paso 6: el cliente selecciona que prestamo desea cancelar.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese su dni.
+        Paso 4: el sistema verifica que sea un dni valido.
+        Paso 5: el sistema lista los prestamos del cliente.
+        Paso 7: el sistema verifica que posea saldo suficiente para
+        pagar el monto adeudado.
+        Paso 8: el sistema registrara la cancelacion y emitira un 
+        comprobante con los datos de la operacion.
+
+Curso alterno:
+        Paso 4: no es un dni valido. El sistema lo notifica. Vuelve al
+        paso 1.
+        Paso 7: no posee saldo suficiente para pagar el monto adeudado.
+        Se notifica. Vuelve al paso 5.
+        
+
+Postcondicion: un cliente realizo la cancelacion total de un prestamo.
+
