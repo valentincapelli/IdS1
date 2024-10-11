@@ -1,0 +1,113 @@
+Historias de usuario:
+    Iniciar sesion
+    Cerrar sesion
+    Dar de alta una tarjeta
+    Dar de baja una tarjeta
+    Pedir listado
+
+Historia de usuario 1:
+Id: iniciar sesion.
+Titulo: como personal de area comercial o gerente de la sucursal quiero
+iniciar sesion para acceder a mis funcionalidades.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: inicio exitoso.
+    Dado un usuario registrado en el sistema con credencial "1234" y una buena conexion con el sistema del banco central.
+    Cuando el usuario ingresa la credencial "1234" y presiona "Enviar".
+    Entonces el sistema envia las credenciales al banco central, espera la respuesta y el sistema recibe el token de autenticacion.
+
+    Escenario 2: inicio fallido por mala conexion con el banco central.
+    Dado un usuario registrado en el sistema con credencial "1234" y una mala conexion con el sistema del banco central.
+    Cuando el usuario ingresa la credencial "1234" y presiona "Enviar".
+    Entonces el sistema notifica que no se pudo establecer conexion con el banco central y que no podra iniciar sesion.
+
+    Escenario 3: inicio fallido por credencial incorrecta.
+    Dado un usuario NO registrado en el sistema con credencial "1234" y una buena conexion con el sistema del banco central.
+    Cuando el usuario ingresa la credencial "1234" y presiona "Enviar".
+    Entonces el sistema envia las credenciales al banco central, espera la respuesta, y al no recibir respuesta, se informa que
+    el numero de credencial ingresado no es correcto.
+
+Historia de usuario 2:
+Id: cerrar sesion.
+Titulo: como personal de area comercial o gerente de la sucursal quiero
+cerrar sesion para que no quede mi sesion abierta.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: cierre exitoso.
+    Dado un usuario de credencial "1234" con la sesion abierta.
+    Cuando el usuario presiona "Cerrar sesion".
+    Entonces el sistema cierra la sesion y lo redirige a la pagina de
+    log in y sign in.
+
+Historia de usuario 3: 
+Id: dar de alta tarjeta.
+Titulo: como personal quiero dar de alta una nueva tarjeta para pagar
+cosas con ella.
+Reglas de negocio:
+    - La persona no puede ser morosa en el sistema SIVA.
+
+Criterios de aceptacion:
+    Escenario 1: dado de alta exitoso.
+    Dado un personal que pertenecece al banco con nombre "valentin capelli", dni "12345", CUIT "11111", hay una buena conexion con el sistema SIVA y no es morosa.
+    Cuando el personal ingresa  "valentin capelli", dni "12345", CUIT "11111", selecciona "Gold" y presiona "Aceptar".
+    Entonces el sistema le envia el dni al SIVA, recibe la respuesta Positiva y el numero de tarjeta nuevo.
+
+    Escenario 2: dado de alta fallido por no pertenecer al banco.
+    Dado un personal que NO pertenecece al banco con nombre "miguel capelli", dni "1234", CUIT "22222", hay una buena conexion con el sistema SIVA.
+    Cuando el personal ingresa  "miguel capelli", dni "1234", CUIT "22222", selecciona "Gold" y presiona "Aceptar".
+    Entonces el sistema informa que los datos ingresados no pertenecer a un cliente del banco.
+
+    Escenario 3: dado de alta fallido por morosa.
+    Dado un personal que pertenecece al banco con nombre "valentin capelli", dni "12345", CUIT "11111", hay una buena conexion con el sistema SIVA y es morosa.
+    Cuando el personal ingresa  "valentin capelli", dni "12345", CUIT "11111", selecciona "Gold" y presiona "Aceptar".
+    Entonces el sistema le envia el dni al SIVA, recibe la respuesta negativa e informa que no se puede dar de alta la tarjeta por que es morosa.
+
+    Escenario 3: dado de alta fallido mala conexion con SIVA.
+    Dado un personal que pertenecece al banco con nombre "valentin capelli", dni "12345", CUIT "11111", hay una mala conexion con el sistema SIVA y no es morosa.
+    Cuando el personal ingresa  "valentin capelli", dni "12345", CUIT "11111", selecciona "Gold" y presiona "Aceptar".
+    Entonces el sistema informa que no se pudo establecer conexion con el SIVA.
+
+Historia de usuario 4:
+Id: dar de baja una tarjeta.
+Titulo: como personal quiero dar de baja una tarjeta porque no la uso mas.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: dado de baja exitoso.
+    Dado una tarjeta del personal "1111" con numero "1234" que pertenece a sus tarjetas.
+    Cuando la persona ingresa el numero de tarjeta "1234" y presiona "Aceptar".
+    Entonces el sistema elimina de la base de datos del banco a la tarjeta y lo informa.
+
+    Escenario 2: dado de baja fallido.
+    Dado el personal "2222" y un numero de tarjeta "12345" que no esta entre sus tarjetas.
+    Cuando la persona ingresa el numero de tarjeta "12345" y presiona "Aceptar".
+    Entonces el sistema informa que ese numero de tarjeta no corresponde a una de sus tarjeta.
+
+Historia de usuario 5:
+Id: pedir listado.
+Titulo: como gerente quiero pedir un listado para ver las operaciones entre
+ciertas fechas.
+Reglas de negocio:
+    - No se puede ingresar fechas futuras al presente.
+    - La fecha de inicio no puede ser mayor que la de fin.
+
+Criterios de aceptacion:
+    Escenario 1: pedido de listado exitoso.
+    Dadas las fechas "31/03/2024" y "11/10/2024" que no son futuras y respeten el orden de inicio y fin.
+    Cuando el gerente ingresa "31/03/2024" y "11/10/2024" y presiona "Aceptar".
+    Entonces el sistema le mostrara el listado de operaciones realizadas entre esas fechas.
+
+    Escenario 2: pedido de listado fallido por fechas futuras.
+    Dadas las fechas "31/03/2024" y "11/10/2025" que si son futuras y respeten el orden de inicio y fin.
+    Cuando el gerente ingresa "31/03/2024" y "11/10/2025" y presiona "Aceptar".
+    Entonces el sistema le informara que las fechas ingresadas son futuras al presente.
+
+    Escenario 3: pedido de listado fallido por desorden de las fechas.
+    Dadas las fechas "31/03/2024" y "11/10/2023" que si son futuras pero no respetan el orden de inicio y fin.
+    Cuando el gerente ingresa "31/03/2024" y "11/10/2023" y presiona "Aceptar".
+    Entonces el sistema le informara que las fechas ingresadas no respetan el orden de inicio y fin.
+
+
+
