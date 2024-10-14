@@ -1,0 +1,210 @@
+Rol de usuarios:
+    Visitante
+    Usuario registrado
+
+Historias de usuario:
+    Ver catalogo
+    Comprar libros
+    Registrar usuario
+    Confirmar registro 
+    Iniciar sesion
+    Cerrar sesion
+    Pagar con tarjeta
+
+Historia de usuario 1
+Id: como visitante quiero registrarme en el sistema para poder comprar
+libros.
+Reglas de negocio:
+    - El mail no debe estar ya registrado en el sistema.
+    - La clave parcial  debe ser de 6 caracteres.
+
+Criterios de aceptacion:
+    Escenario 1: registro exitoso.
+    Dado un mail "valentin@gmail.com" no registrado en el sistema y
+    una clave "123456" con 6 caracteres.
+    Cuando el visitante ingrese "Valentin", "Capelli", "45620",
+    "valentin@gmail.com" y "123456" y presiona aceptar.
+    Entonces el sistema generara un codigo de 16 digitos y enviarlo
+    al correo del visitante.
+
+    Escenario 2: registro fallido por mail ya registrado.
+    Dado un mail "valentincapelli@gmail.com" que ya esta registrado en el 
+    sistema y una clave "123456" con 6 caracteres.
+    Cuando el visitante ingrese "Valentin", "Capelli", "45620",
+    "valentin@gmail.com" y "123456" y presiona aceptar.
+    Entonces el sistema informara que ese mail ya se encuentra registrado.
+
+    Escenario 3: registro fallido por contrasenia invalida.
+    Dado un mail "valentin@gmail.com" no registrado en el sistema y
+    una clave "1234567" con mas de 6 caracteres.
+    Cuando el visitante ingrese "Valentin", "Capelli", "45620",
+    "valentin@gmail.com" y "1234567" y presiona aceptar.
+    Entonces el sistema informara que la clave parcial ingresada debe ser
+    de 6 caracteres.
+
+Historia de usuario 2
+Id: como visitante quiero confirmar mi registro para poder comprar libros.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: confirmacion exitosa.
+    Dado un mail "valentin@gmail.com" que fue enviado en la primera parte del
+    registro y el codigo de 16 digitos "1234345678123456" que pertenece a ese registro
+    y la conexion la pagina web es buena.
+    Cuando el visitante entra a la página de confirmación e ingresa su dirección de 
+    correo "valentin@gmail.com" y el código de 16 dígitos "1234345678123456" y presiona aceptar.
+    Entonces el sistema lo registra definitivamente como usuario.
+
+    Escenario 2: confirmacion fallida por mail.
+    Dado un mail "valentincapelli@gmail.com" que no fue enviado en la primera parte del
+    registro y el codigo de 16 digitos "1234345678123456" que pertenece a ese registro
+    y la conexion la pagina web es buena.
+    Cuando el visitante entra a la página de confirmación e ingresa su dirección de 
+    correo "valentincapelli@gmail.com" y el código de 16 dígitos "1234345678123456" y presiona aceptar.
+    Entonces el sistema informa que el mail o la clave son incorrectas.
+
+    Escenario 3: confirmacion fallida por clave.
+    Dado un mail "valentin@gmail.com" que fue enviado en la primera parte del
+    registro y el codigo de 16 digitos "1234345678123459" que no pertenece a ese registro
+    y la conexion la pagina web es buena.
+    Cuando el visitante entra a la página de confirmación e ingresa su dirección de 
+    correo "valentin@gmail.com" y el código de 16 dígitos "1234345678123459" y presiona aceptar.
+    Entonces el sistema informa que el mail o la clave son incorrectas.
+
+    Escenario 4: confirmacion fallida por mala conexion.
+    Dado un mail "valentin@gmail.com" que fue enviado en la primera parte del
+    registro y el codigo de 16 digitos "1234345678123459" que no pertenece a ese registro y
+    la conexion la pagina web es mala.
+    Cuando el visitante entra a la página de confirmación e ingresa su dirección de 
+    correo "valentin@gmail.com" y el código de 16 dígitos "1234345678123459" y presiona aceptar.
+    Entonces el sistema informa quela conexion con la pagina web no se pudo realizar.
+
+    // No se si hacer otro escenario para fallo en la pagina.
+
+Historia de usuario 3
+Id: iniciar sesion.
+Descripcion: como usuario registrado quiero iniciar sesion para poder comprar
+libros.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: inicio de sesion exitoso.
+    Dado un correo de usuario registrado "valentin@gmail.com" que esta registrado
+    y una clave "123456" que pertenece al usuario registrado.
+    Cuando el usuario registrado ingresa "valentin@gmail.com" y "123456" y presiona aceptar.
+    Entonces el sistema lo redirige la pagina principal y le da las funcionalidades
+    de usuario registrado con sesion iniciada.
+
+    Escenario 2: inicio de sesion fallido por mail.
+    Dado un correo de usuario registrado "valentincapelli@gmail.com" que no esta registrado
+    y una clave "123456" que no pertenece al usuario registrado.
+    Cuando el usuario registrado ingresa "valentincapelli@gmail.com" y "123456" y presiona aceptar.
+    Entonces el sistema informa que el mail o la clave son incorrectos.
+
+    Escenario 3: inicio de sesion fallido por clave.
+    Dado un correo de usuario registrado "valentin@gmail.com" que esta registrado
+    y una clave "1234567" que no pertenece al usuario registrado.
+    Cuando el usuario registrado ingresa "valentin@gmail.com" y "1234567" y presiona aceptar.
+    Entonces el sistema informa que el mail o la clave son incorrectos.
+
+Historia de usuario 4
+Id: cerrar sesion.
+Descripcion: como usuario registrado quiero cerrar sesion para que no queden mis datos
+en la sesion.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Dado un usuario registrado con la sesion iniciada.
+    Cuando el usuario registrado presiona "Cerrar sesion".
+    Entonces el sistema cierra la sesion y lo redirige a la pagina de sign in y 
+    log in.
+
+Historia de usuario 5
+Id: ver catalogo.
+Descripcion: como visitante o usuario registrado quiero ver el catalogo de libros
+para poder ver la variedad que hay.
+Reglas  de negocio:
+
+Criterios de aceptacion
+    Escenario 1: vista de catalogo exitosa.
+    Dado un visitante o un usuario registrado y una buena conexion con el sitio web.
+    Cuando el visitante o usuario registrado presiona "Ver catalogo".
+    Entonces el sistema mostrar el catalogo con todos los libros disponibles en ese
+    momento.
+
+    Escenario 2: vista de catalogo fallida.
+    Dado un visitante o un usuario registrado y una mala conexion con el sitio web.
+    Cuando el visitante o usuario registrado presiona "Ver catalogo".
+    Entonces el sistema informara que la conexion con el sitio web no se pudo realizar.
+
+Historia de usuario 6
+Id: buscar libro.
+Descripcion: como usuario registrado quiero buscar un libro para poder comprarlo.
+Reglas de negocio:
+
+Criterios de aceptacion:
+    Escenario 1: busqueda exitosa.
+    Dado un ISBN "1234" que pertenece a un libro registrado.
+    Cuando el usuario registrado ingrese el ISBN "1234" y presiona "Aceptar".
+    Entonces el sistema  muestra al usuario la portada con una descripción del libro 
+    y la opción “Comprar”.
+
+    Escenario 2: busqueda fallida.
+    Dado un ISBN "12345" que no pertenece a un libro registrado.
+    Cuando el usuario registrado ingrese el ISBN "12345" y presiona "Aceptar".
+    Entonces el sistema  informa que no existe un libro registrado para el ISBN
+    ingresado.
+
+Historia de usuario 7
+Id: comprar libro.
+Descripcion: como usuario registrado quiero comprar un libro para poder leerlo.
+Reglas de negocio:
+    - Solo el titular de la tarjeta puede realizar la compra, por lo que el nombre y 
+    apellido registrado debe coincidir con el de la tarjeta.
+
+Criterios de aceptacion:
+    Escenario 1: compra exitosa.
+    Dado el nombre y apellido de la cuenta "Valentin" "Capelli" que coincide con el de
+    la tarjeta con la que se va a pagar, una conexion buena con el servidor de la tarjeta,
+    ,tiene saldo suficiente y el numero de tarjeta es valido.
+    Cuando el usuario registrado presiona "Comprar", ingresa "Capelli", "Valentin" y
+    numero de tarjeta "12345".
+    Entonces el sistema envia los datos al servidor de la tarjeta, espera respuesta,
+    se realiza el pago, y se genera un enlace de descarga al correo del usuario.
+
+    Escenario 2: compra fallida por no coincidir nombres.
+    Dado el nombre y apellido de la cuenta "Miguel" "Capelli" que no coincide con el de
+    la tarjeta con la que se va a pagar, una conexion buena con el servidor de la tarjeta,
+    ,tiene saldo suficiente y el numero de tarjeta es valido.
+    Cuando el usuario registrado presiona "Comprar", ingresa "Capelli", "Valentin" y
+    numero de tarjeta "12345".
+    Entonces el sistema informa que el nombre y  apellido registrado debe coincidir 
+    con el de la tarjeta.
+
+    Escenario 3: compra fallida por mala conexion con el servidor.
+    Dado el nombre y apellido de la cuenta "Valentin" "Capelli" que coincide con el de
+    la tarjeta con la que se va a pagar, una conexion mala con el servidor de la tarjeta,
+    tiene saldo suficiente y el numero de tarjeta es valido.
+    Cuando el usuario registrado presiona "Comprar", ingresa "Capelli", "Valentin" y
+    numero de tarjeta "12345".
+    Entonces el sistema informa que no se pudo realizar el pago por que la conexion
+    con el servidor de la tarjeta esta caida.
+
+    Escenario 4: compra fallida por tarjeta invalida.
+    Dado el nombre y apellido de la cuenta "Valentin" "Capelli" que coincide con el de
+    la tarjeta con la que se va a pagar, una conexion buena con el servidor de la tarjeta, 
+    tiene saldo suficiente y el numero de tarjeta es invalido.
+    Cuando el usuario registrado presiona "Comprar", ingresa "Capelli", "Valentin" y
+    numero de tarjeta "123456".
+    Entonces el sistema envia los datos al servidor de la tarjeta, espera respuesta,
+    y el sistema informa que el numero de tarjeta es invalido
+
+    Escenario 5: compra fallida por saldo insuficiente.
+    Dado el nombre y apellido de la cuenta "Valentin" "Capelli" que coincide con el de
+    la tarjeta con la que se va a pagar, una conexion buena con el servidor de la tarjeta,
+    ,tiene saldo insuficiente y el numero de tarjeta es valido.
+    Cuando el usuario registrado presiona "Comprar", ingresa "Capelli", "Valentin" y
+    numero de tarjeta "12345".
+    Entonces el sistema envia los datos al servidor de la tarjeta, espera respuesta,
+    y el sistema informa que no posee saldo suficiente en la tarjeta.
+
