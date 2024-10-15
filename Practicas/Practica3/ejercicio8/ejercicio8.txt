@@ -1,0 +1,131 @@
+Actores:
+    Empleado
+    Gerente de la sucursal
+    Central de cobro
+
+Casos de uso:
+    Realizar pago
+    Registrar pagos
+    Conectar central
+    Ver estadisticas
+
+
+Nombre del caso de uso: realizar pago.
+Descripcion: este caso de uso describe el evento que un empleado o un gerente de la
+sucursal le realiza el pago a un cliente.
+Actores: empleado, central de cobro.
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el empleado presiona "Realizar pago".
+        Paso 3: el empleado ingresa el codigo de pago electronico.
+        Paso 6: la central de cobro recibe el codigo y verifica que sea valido.
+        Paso 7: la central envia la respuesta al sistema.
+
+    Accion del sistema:
+        Paso 2: el sistema le solicita que ingrese el codigo de pago electronico.
+        Paso 4: el sistema ejecuta el CU conectar central.
+        Paso 5: el sistema le envia a la central de cobro el codigo de pago electronico.
+        Paso 8: el sistema recibe la respuesta de la central.
+        Paso 9: el sistema recupera los datos de la factura y lo notifica.
+
+Curso alterno:
+    Paso 4: fallo al establecer conexion con la central de cobro. Se notifica. Fin del
+    CU.
+    Paso 9: el sistema recibio que el codigo de pago ingresado es invalido. Se notifica.
+    Fin del CU.
+
+Postcondicion: un pago ha sido realizado por un empleado.
+
+
+
+Nombre del caso de uso: conectar central.
+Descripcion: este caso de uso describe el evento que el sistema establece conexion
+con la central de cobro.
+Actores: central de cobro.
+
+Precondiciones: se debe haber ejecutado el CU realizar pago o registrar pagos.
+
+Curso normal:
+    Accion del actor:
+        Paso 2: la central de cobro acepta la conexion con el sistema y solicita el
+        token.
+        Paso 4: la central de cobro valida el token.
+        Paso 5: la central de cobro retorna el resultado.
+
+    Accion del sistema:
+        Paso 1: el sistema solicita conexion con la central de cobro.
+        Paso 3: el sistema envia el token identificador a la central de cobro.
+        Paso 6: el sistema recibe que el token es valido.
+
+Curso alterno:
+    Paso 1: fallo al intentar solicitar conexion con la central. Se informa el error.
+    Fin del CU.
+    Paso 6: la validacion del token es incorrecta. Se informa error en la validacion
+    del token. Fin del CU.
+
+
+
+Nombre del caso de uso: registrar pagos.
+Descripcion: este caso de uso describe el evento que un gerente de la sucursal 
+registra los pagos de los clientes en la central de cobro.
+Actores: gerente de la sucursal, central de cobro.
+
+Precondiciones:
+
+Curso normal:
+    Accion del actor:
+        Paso 1: el gerente presiona "Registrar pagos".
+        Psao 3: el gerente ingresa la clave maestra.
+        Paso 6: el gerente presiona "Enviar" para enviar las transacciones a la central 
+        de cobro.
+        Paso 8: la central de cobro recibe las transacciones y confirma la recepcion
+        exitosa.
+
+    Accion del sistema:
+        Paso 2: el sistema solicita que ingrese la clave maestra.
+        Paso 4: el sistema verifica que la clave maestra sea correcta.
+        Paso 5: el sistema recupera las transacciones de los impuestos y servicios
+        cobrados en el dia.
+        Paso 6: el sistema ejecuta el CU conectar central.
+        Paso 7: el sistema verifica que no se hayan enviado todavia.
+        Paso 9: el sistema registra las transacciones como enviadas.
+
+Curso alterno:
+    Paso 4: la clave maestra es incorrecta. Se notifica. Vuelve al paso 2.
+    Paso 6: fallo en la conexion con la central. Se notifica. Fin del CU.
+    Paso 7: las transacciones ya han sido enviadas una vez. Se notifica el error.
+    Fin del CU.
+
+Postcondicion: los pagos de los clientes han sido registrados en la central de cobro.
+
+
+
+Nombre del caso de uso: ver estadisticas.
+Descripcion: este caso de uso describe el evento que un gerente de la sucursal solicita
+para ver las estadisticas de los impuestos y servicios cobrados en un rango de fechas.
+Actores: gerente de la sucursal.
+
+Precondiciones:
+
+Curso normal
+    Accion del actor:
+        Paso 1: el gerente presiona "Ver estadisticas".
+        Paso 3: el gerente ingresa los datos solicitados.
+
+    Accion del sistema:
+        Paso 2: el sistema solicita la clave maestra y un rango de fechas.
+        Paso 4: el sistema verifica la clave maestra.
+        Paso 5: el sistema verifica que las fechas sean validas.
+        Paso 6: el sistema muestra los montos y la cantidad de cobros realizados en esas
+        fechas, agrupados por empresa.
+
+Curso alterno:
+    Paso 4: clave maestra incorrecta. Se notifica. Vuelve al paso 2.
+    Paso 5: rango de fechas erroneo. Se notifica. Vuelve al paso 2.
+    Paso 6: no hay cobros registrados entre las fechas ingresadas. Se notifica.
+    Fin del CU.
+
+Postcondicion: 
