@@ -4,7 +4,7 @@ muebles.
 
 Actores: encargado.
 
-Precondiciones: el encargado debe iniciar sesion.
+Precondiciones: el encargado debe tener una sesion iniciada.
 
 Curso normal: 
     Accion del Actor: 
@@ -46,7 +46,7 @@ Curso normal:
 
 Curso alterno:
     Paso 4: el sistema informa que la cantidad minima de muebles por reserva no es
-    superior a 3. Se le notifica que revise los datos.
+    superior a 3. Se le notifica que revise los datos. Vuelve al paso 2.
     Paso 5: el pago no se realiza. Se notifica al usuario. Fin de CU.
 
 ---------------------------------------------------------------------------------------
