@@ -1,0 +1,83 @@
+Nombre del CU: activar alarma silenciosa.
+
+Descripcion: este caso de uso describe el evento que un usuario realiza
+la activacion de la alarma sileciosa.
+
+Actores:
+    Usuario estandar o administrador
+
+Precondiciones: 
+
+Curso normal:
+    Acciones del actor:
+        Paso 1: el usuario estandar o administrador presiona activar alarma sileciosa.
+        Paso 3: el usuario estandar o administrador ingresa el codigo.
+
+    Acciones del sistema:
+        Paso 2: el sistema solicita el ingreso de un codigo especial.
+        Paso 4: el sistema verifica el codigo.
+        Paso 5: el sistema registra la fecha, hora, lugar de vivienda y sensor.
+        Paso 6: se ejecuta el caso de uso reportar incidente.
+
+Curso alterno:
+        Paso 4: el sistema rechaza el codigo ingresado. Vuelve al paso 2.
+
+Postcondicion: la alarma sileciosa ha sido activada.
+
+------------------------------------------------------------------------------------------
+
+Nombre del CU: verificar sensores.
+
+Descripcion: este caso de uso describe como mediante el reloj el sistema verifica cada
+15 segundos los sensores.
+
+Actores: reloj.
+   
+Precondiciones: se debe tener la alarma armada.
+
+Curso normal:
+    Acciones del actor:
+        Paso 1: el reloj emite senial para verificar los sensores.
+
+    Acciones del sistema:
+        Paso 2: el sistema detecta la activacion de un sensor.
+        Paso 3: el sistema registra la fecha, hora, lugar de la vivienda y sensor.
+        Paso 4: el sistema activa la alarma.
+        Paso 5: el sistema ejecuta el CU reportar incidente.
+
+Curso alterno:
+        Paso 2: el sistema verifica que no se activo ningun sensor. Fin del CU.
+
+Postcondicion: se verificaron todos los sensores.
+
+------------------------------------------------------------------------------------------
+
+Nombre del CU: reportar incidente.
+
+Descripcion: este caso de uso describe como se le reporta un incidente al servidor
+central.
+
+Actores: servidor central. 
+   
+Precondiciones: se tuvo que haber ejecutado el CU activar alarma silenciosa o verificar
+sensores.
+
+Curso normal:
+    Acciones del actor:
+        Paso 2: la central recibe la llamada y devuelve una respuesta.
+        Paso 4: la central solicita al sistema el identificador de la alarma y los datos
+        del evento.
+        Paso 6: el servidor recibe los datos y devuelve un tiempo estimado de llegada
+        de un movil.
+
+    Acciones del sistema:
+        Paso 1: el sistema marca un numero telefonico.
+        Paso 3: el sistema recibe que se establecio conexion con el servidor.
+        Paso 5: el sistema envia los datos solicitados.
+        Paso 7: el sistema recibe el tiempo estimado y lo almacena.
+
+Curso alterno:
+        Paso 3: el sistema recibe que la conexion fue rechazada o la linea telefonica
+        se encuentra ocupada. Volver al paso 1.
+
+Postcondicion: se reporto el incidente al servidor central.
